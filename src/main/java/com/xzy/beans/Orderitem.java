@@ -2,6 +2,16 @@ package com.xzy.beans;
 
 public class Orderitem {
 
+    private Orders orders;
+
+    public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
+
     private Integer orderitemId;
     private Integer oiProductNum;
     private Float oiTotalPrice;
@@ -65,4 +75,5 @@ public class Orderitem {
     public void setOiProductColor(String oiProductColor) {
         this.oiProductColor = oiProductColor;
     }
+
 }

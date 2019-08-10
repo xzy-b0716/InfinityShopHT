@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzy.mapper.SecProductMapper" >
+    <select id="queryByProductId" resultMap="querySecProduct" parameterType="Integer">
+
+      select
+      s.seckill_price,
+      s.seckill_start_time,
+      s.seckill_end_time,
+      s.seckill_stock,
+      p.product_id,
+      p.product_name,
+      p.product_price,
+      p.product_describe,
+      p.product_brand,
+      p.product_material,
+      p.product_version,
+      p.product_style,
+      p.product_thickness,
+      pc.color,
+      ps.size,
+      c.path,
+      pdi.produc_discuss_comment,
+      pdi.pd_createtime,
+      u.user_name
+      from
+      seckill s,
+      product p,
+	  product_color pc,
+	  product_size ps,
+	  product_discuss pdi,
+	  carousel c,
+	  user u
+      where
+      s.product_id=p.product_id
+      and
+      p.product_id=ps.product_id
+      and
+      p.product_id=pc.product_id
+      and
+      p.product_id=pdi.product_id
+      and
+      p.product_id=c.product_id
+      and
+      p.product_id=#{productId}
+      and
+      pdi.user_id=u.user_id
+
+    </select>
+
+    <resultMap id="querySecProduct" type="com.xzy.beans.Seckill">
+        <result column="seckill_price" property="seckillPrice" jdbcType="REAL" />
+        <result column="seckill_start_time" property="seckillStartTime" jdbcType="TIMESTAMP" />
+        <result column="seckill_end_time" property="seckillEndTime" jdbcType="TIMESTAMP" />
+        <result column="seckill_stock" property="seckillStock" jdbcType="INTEGER" />
+        
+        <association property="product" javaType="com.xzy.beans.Product">
+            <id column="product_id" property="productId" jdbcType="INTEGER" />
+            <result column="product_name" property="productName" jdbcType="VARCHAR" />
+            <result column="product_price" property="productPrice" jdbcType="REAL" />
+            <result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
+            <result column="product_size_pic" property="productSizePic" jdbcType="VARCHAR" />
+            <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
+            <result column="product_material" property="productMaterial" jdbcType="VARCHAR" />
+            <result column="product_version" property="productVersion" jdbcType="VARCHAR" />
+            <result column="product_style" property="productStyle" jdbcType="VARCHAR" />
+            <result column="product_thickness" property="productThickness" jdbcType="VARCHAR" />
+            
+            <collection property="productColor" ofType="com.xzy.beans.ProductColor">
+                <result column="color" property="color" jdbcType="VARCHAR" />
+            </collection>
+
+            <collection property="productSize" ofType="com.xzy.beans.ProductSize">
+                <result column="size" property="size" jdbcType="VARCHAR" />
+            </collection>
+
+            <collection property="carousel" ofType="com.xzy.beans.Carousel">
+                <result column="path" property="path" jdbcType="VARCHAR"/>
+            </collection>
+
+            <collection property="productDiscuss" ofType="com.xzy.beans.ProductDiscuss">
+
+                <result column="produc_discuss_comment" property="producDiscussComment" jdbcType="VARCHAR" />
+                <result column="pd_createtime" property="pdCreatetime" jdbcType="TIMESTAMP" />
+
+                <association property="user" javaType="com.xzy.beans.User">
+                    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+                </association>
+
+            </collection>
+
+        </association>
+
+    </resultMap>
+
+</mapper>

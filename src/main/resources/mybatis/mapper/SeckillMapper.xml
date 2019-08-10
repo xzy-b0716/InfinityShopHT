@@ -171,4 +171,42 @@
       product_id = #{productId,jdbcType=INTEGER}
     where seckill_id = #{seckillId,jdbcType=INTEGER}
   </update>
+
+  <update id="reduceNumber">
+    update
+    seckill
+    set
+    seckill_stock = seckill_stock-1
+    where seckill.product_id = #{arg0}
+    and seckill_start_time <![CDATA[ <= ]]> #{arg1}
+    and seckill_end_time >= #{arg1}
+    and seckill_stock > 0
+  </update>
+
+
+  <select id="querySecProList" resultMap="queryList">
+    select
+    p.product_id,
+    s.seckill_title,
+    p.product_price,
+    s.seckill_price,
+    p.product_picture
+    from
+    seckill s,
+    product p
+    where s.product_id = #{productId}
+  </select>
+
+  <resultMap id="queryList" type="com.xzy.beans.Seckill">
+    <result column="seckill_title" property="seckillTitle" jdbcType="VARCHAR" />
+    <result column="seckill_price" property="seckillPrice" jdbcType="REAL" />
+
+    <association property="product" javaType="com.xzy.beans.Product">
+      <id column="product_id" property="productId" jdbcType="INTEGER" />
+      <result column="product_picture" property="productPicture" jdbcType="VARCHAR" />
+      <result column="product_price" property="productPrice" jdbcType="REAL" />
+    </association>
+
+  </resultMap>
+  
 </mapper>

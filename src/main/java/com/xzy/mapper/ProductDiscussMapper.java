@@ -50,4 +50,11 @@ public interface ProductDiscussMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(ProductDiscuss record);
+
+    /**
+     * 查询商品对应评价总条数
+     * @param productId
+     * @return
+     */
+    int countDiscuss(Integer productId);
 }

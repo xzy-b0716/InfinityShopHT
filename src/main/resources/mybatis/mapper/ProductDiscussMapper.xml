@@ -124,4 +124,9 @@
       pd_createtime = #{pdCreatetime,jdbcType=TIMESTAMP}
     where product_discuss_id = #{productDiscussId,jdbcType=INTEGER}
   </update>
+
+  <select id="countDiscuss" resultType="Integer">
+    select count(*) from product_discuss pd where pd.product_id = #{productId}
+  </select>
+
 </mapper>

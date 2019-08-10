@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzy.mapper.SuccessKilledMapper" >
+
+    <select id="getSecProUser" resultType="Integer">
+        select
+        sk.user_id
+        from
+        success_killed sk
+        where
+        sk.product_id = #{arg0}
+    </select>
+
+    <insert id="insertSuccessKilled">
+        insert into success_killed (product_id,user_id,create_time)
+        values (#{arg0},#{arg1},#{arg2})
+    </insert>
+
+    <select id="queryByWithSeckill" resultType="com.xzy.beans.SuccessKillPro">
+        select
+         sk.user_id,
+         sk.seckill_state,
+         sk.product_id,
+         sk.create_time,
+         s.seckill_price,
+         p.product_picture,
+         p.product_name
+         from
+         success_killed sk,
+         seckill s,
+         product p
+         where
+         sk.product_id = s.product_id
+         and
+         s.product_id = p.product_id
+         and
+         p.product_id = #{arg0}
+		 and
+		 sk.user_id = #{arg1}
+
+    </select>
+
+
+
+</mapper>

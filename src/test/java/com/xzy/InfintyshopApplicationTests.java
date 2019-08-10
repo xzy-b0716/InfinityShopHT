@@ -11,6 +11,7 @@ public class InfintyshopApplicationTests {
 
     @Test
     public void contextLoads() {
+
     }
 
 }
