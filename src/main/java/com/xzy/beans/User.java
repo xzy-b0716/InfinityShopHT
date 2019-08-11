@@ -14,9 +14,9 @@ public class User {
 
     private String userTel;
 
-    private Date userBirth;
+    private String userBirth;
 
-    private Date userCreat;
+    private String userCreat;
 
     private String userReal;
 
@@ -144,7 +144,7 @@ public class User {
      *
      * @mbggenerated
      */
-    public Date getUserBirth() {
+    public String getUserBirth() {
         return userBirth;
     }
 
@@ -156,7 +156,7 @@ public class User {
      *
      * @mbggenerated
      */
-    public void setUserBirth(Date userBirth) {
+    public void setUserBirth(String userBirth) {
         this.userBirth = userBirth;
     }
 
@@ -168,7 +168,7 @@ public class User {
      *
      * @mbggenerated
      */
-    public Date getUserCreat() {
+    public String getUserCreat() {
         return userCreat;
     }
 
@@ -180,7 +180,7 @@ public class User {
      *
      * @mbggenerated
      */
-    public void setUserCreat(Date userCreat) {
+    public void setUserCreat(String userCreat) {
         this.userCreat = userCreat;
     }
 

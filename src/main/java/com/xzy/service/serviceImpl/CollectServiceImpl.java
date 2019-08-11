@@ -1,0 +1,19 @@
+package com.xzy.service.serviceImpl;
+
+import com.xzy.mapper.CollectMapper;
+import com.xzy.service.CollectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * Create by Shuai on 2019/8/10 14:01
+ */
+@Service
+public class CollectServiceImpl implements CollectService {
+    @Autowired
+    private CollectMapper collectMapper;
+    @Override
+    public Integer isCollect(Integer productId, Integer userId) {
+        return collectMapper.isLike(productId,userId);
+    }
+}
