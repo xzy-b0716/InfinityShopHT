@@ -1,0 +1,71 @@
+package com.xzy.controller;
+
+import com.xzy.beans.Product;
+import com.xzy.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+/**
+ * @
+ */
+@Controller
+public class ProductController {
+    //获得热门商品
+    @Autowired
+    private ProductService productService;
+    @RequestMapping("/orderbyproduct_com_num/{id}")
+    @ResponseBody
+    public   List<Product> orderbyproduct_com_num(@PathVariable("id") Integer  id) {
+        List<Product> productsList = productService.orderbyproduct_com_num(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+    @RequestMapping("/orderbyproduct_price/{id}")
+    @ResponseBody
+    public   List<Product> orderbyproduct_price(@PathVariable("id") Integer  id) {
+        List<Product> productsList = productService.orderbyproduct_price(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+    @RequestMapping("/orderbyproduct_createtime/{id}")
+    @ResponseBody
+    public   List<Product> orderbyproduct_createtime(@PathVariable("id") Integer  id) {
+        List<Product> productsList = productService.orderbyproduct_createtime(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+    @RequestMapping("/selectClassProductByProductId/{id}")
+    @ResponseBody
+    public   List<Product> selectClassProductByProductId(@PathVariable("id") Integer  id) {
+        List<Product> productsList = productService.selectClassProductByProductId(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+    @RequestMapping("/recommendNewest")
+    @ResponseBody
+    public List<Product>  recommendNewest() {
+
+        List<Product> productsList = productService.recommendNewest();
+        return   productsList;
+    }
+    @RequestMapping("/getClasss/{sex}")
+    @ResponseBody
+    public List<Product> getClasss(@PathVariable("sex") Integer sex) {
+        List<Product> productsList = productService.getClasss(sex);
+        System.out.println(productsList);
+        return productsList;
+    }
+    @RequestMapping("/selectProductByProductClassId/{id}")
+    @ResponseBody
+    public   List<Product> selectProductByProductClassId(@PathVariable("id") String  id) {
+        List<Product> productsList = productService.selectProductByProductClassId(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+
+}
