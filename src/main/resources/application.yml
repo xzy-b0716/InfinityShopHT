@@ -2,7 +2,7 @@ spring:
   datasource:
     #   数据源基本配置
     username: root
-    password: mysql
+    password: 1998
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/infintyshop?useSSL=true&serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
@@ -29,3 +29,7 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+
+preread:
+  #文件上传目录（注意Linux和Windows上的目录结构不同）
+  uploadPath: E:/image/
