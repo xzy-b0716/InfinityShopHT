@@ -12,7 +12,7 @@ public interface ProductDiscussService {
 
     //查询评论条数
     Integer countDiscuss(Integer ProductId);
-
+    //添加评论
     void insertDiscuss(ProductDiscuss productDiscuss);
 
 }
