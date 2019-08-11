@@ -1,4 +1,4 @@
-package com.xzy.service;
+package com.xzy.service.ServiceImp;
 
 import com.xzy.beans.Orders;
 import com.xzy.beans.Product;
@@ -7,12 +7,13 @@ import com.xzy.mapper.OrdersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class OrdersService {
-    @Autowired
+public class OrdersServiceImp {
+    @Resource
     private OrdersMapper om;
 
     //单点购买增加(生成)订单

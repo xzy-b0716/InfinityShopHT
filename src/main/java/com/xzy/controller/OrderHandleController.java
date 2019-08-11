@@ -7,9 +7,9 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.xzy.beans.Orderitem;
 import com.xzy.config.AlipayConfig;
-import com.xzy.service.OrderItemService;
-import com.xzy.service.OrdersService;
-import com.xzy.service.ProductService;
+import com.xzy.service.ServiceImp.OrderItemServiceImp;
+import com.xzy.service.ServiceImp.OrdersServiceImp;
+import com.xzy.service.ServiceImp.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,17 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
 @RequestMapping("/orderHandle")
 public class OrderHandleController {
     @Autowired
-    private OrdersService os;
+    private OrdersServiceImp os;
     @Autowired
-    private OrderItemService ois;
+    private OrderItemServiceImp ois;
     @Autowired
-    private ProductService ps;
+    private ProductServiceImp ps;
 
     /*
     增（完成）

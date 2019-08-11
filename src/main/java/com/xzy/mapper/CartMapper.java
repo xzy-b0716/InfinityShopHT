@@ -1,6 +1,12 @@
 package com.xzy.mapper;
 
 import com.xzy.beans.Cart;
+import com.xzy.beans.CartItem;
+
+import java.util.List;
+import java.util.Map;
+
+import com.xzy.beans.Cart;
 
 public interface CartMapper {
     /**
@@ -50,4 +56,15 @@ public interface CartMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Cart record);
+
+    public List<CartItem> selectAllCartItemByOneUser(Integer userId);
+
+    public void deleteCartItem(Map map);
+
+    public void insertCartItem(Cart cart);
+
+    public void updateQuantity(Cart cart);
+
+    public List<Cart> selectCart(Integer userId);
 }
+

@@ -1,18 +1,15 @@
 package com.xzy.controller;
 
-import com.xzy.beans.Orderitem;
-import com.xzy.service.OrderItemService;
+import com.xzy.service.ServiceImp.OrderItemServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/orderItem")
 public class OrderItemController {
     @Autowired
-    private OrderItemService ois;
+    private OrderItemServiceImp ois;
     @RequestMapping("/addOrderItemBy01")
     public int addOrderItemBy01(int productId, int num, int ordersId,
                                 String oiProductSize, String oiProductColor){

@@ -158,4 +158,66 @@
       cp_product_color = #{cpProductColor,jdbcType=VARCHAR}
     where cart_id = #{cartId,jdbcType=INTEGER}
   </update>
+<!--展示购物车列表-->
+    <select id="selectAllCartItemByOneUser" resultMap="CartMap" parameterType="Integer">
+        select
+        cart_id,quantity,checked,is_alive,cp_product_size,cp_product_color,product_id
+        from cart where
+        cart.user_id=#{userId}
+
+    </select>
+    <resultMap type="com.xzy.beans.CartItem" id="CartMap">
+        <id column="cart_id" property="cartId" />
+        <result column="quantity" property="quantity" />
+        <result column="checked" property="checked"/>
+        <result column="is_alive" property="isAlive"/>
+        <result column="product_id" property="productId"/>
+        <result column="user_id" property="userId"/>
+        <result column="cp_product_size" property="cpProductSize" />
+        <result column="cp_product_color" property="cpProductColor" />
+        <association property="productName" column="product_id"  select="selectNameById"/>
+        <association property="productPrice" column="product_id" select="selectPriceById"/>
+        <association property="productPicture" column="product_id" select="selectPictureById"/>
+    </resultMap>
+
+    <select id="selectNameById" resultType="string">
+        select product_name
+        from product where
+       product.product_id=#{product_id}
+    </select>
+
+    <select id="selectPriceById" resultType="float">
+        select product_price
+        from product where
+        product.product_id=#{product_id}
+    </select>
+
+    <select id="selectPictureById" resultType="string">
+        select product_picture
+        from product where
+        product.product_id=#{product_id}
+    </select>
+
+<!--左滑删除一条商品-->
+    <update id="deleteCartItem"  parameterType="com.xzy.beans.Cart" >
+        update cart
+        set is_alive=0 where
+        cart.user_id=#{userId} and cart.product_id=#{productId}
+    </update>
+<!--加入购物车-->
+    <insert id="insertCartItem" parameterType="com.xzy.beans.Cart">
+        insert into
+        cart
+        values
+        (null,#{quantity},#{checked},#{productId},#{userId},#{isAlive},#{cpProductSize},#{cpProductColor})
+
+    </insert>
+    <update id="updateQuantity" parameterType="com.xzy.beans.Cart">
+        update  cart set quantity=#{quantity} where cart_id=#{cartId}
+    </update>
+
+    <select id="selectCart" parameterType="Integer" resultType="com.xzy.beans.Cart">
+        select * from cart where user_id=#{userId}
+    </select>
+
 </mapper>

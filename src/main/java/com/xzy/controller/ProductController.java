@@ -1,7 +1,7 @@
 package com.xzy.controller;
 
 import com.xzy.beans.Product;
-import com.xzy.service.ProductService;
+import com.xzy.service.ServiceImp.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
-    private ProductService ps;
+    private ProductServiceImp ps;
     @RequestMapping("/findbypid")
     public Product findbypid(int pId){
         Product product = ps.findProductById(pId);
