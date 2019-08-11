@@ -194,7 +194,7 @@
     from
     seckill s,
     product p
-    where s.product_id = #{productId}
+    where s.product_id = p.product_id
   </select>
 
   <resultMap id="queryList" type="com.xzy.beans.Seckill">

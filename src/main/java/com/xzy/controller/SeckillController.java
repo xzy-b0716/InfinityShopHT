@@ -48,8 +48,8 @@ public class SeckillController {
         return seckillService.querySecProList();
     }
 
-    @RequestMapping(value = "/exposer")
-    public SeckillResult<Exposer> exportSeckillUrl(Integer productId) {
+    @RequestMapping("/exposer/{productId}")
+    public SeckillResult<Exposer> exportSeckillUrl(@PathVariable("productId") Integer productId) {
         SeckillResult<Exposer> result;
         try {
             Exposer exposer = seckillService.exportSeckillUrl(productId);
@@ -78,7 +78,7 @@ public class SeckillController {
 
     }
 
-    @RequestMapping("/execution/{productId}/{userId}/{md5}")
+    @RequestMapping(value = "/execution/{productId}/{userId}/{md5}", produces="application/json;charset=UTF-8")
     public SeckillResult<SeckillExecution> execute(@PathVariable("productId") Integer productId,
                                                    @PathVariable("userId") Integer userId,
                                                    @PathVariable("md5") String md5) {
