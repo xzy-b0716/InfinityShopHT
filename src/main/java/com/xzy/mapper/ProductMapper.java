@@ -1,6 +1,7 @@
 package com.xzy.mapper;
 
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.xzy.beans.Browse;
 import com.xzy.beans.Product;
 import org.springframework.stereotype.Repository;
@@ -29,7 +30,7 @@ public interface ProductMapper {
 
     List<Product> recommendNewest();
 
-    List<Product>  getClasss(Integer sex);
+    List<Product>  getClasss(String sex);
 
     List<Product> selectProductByProductClassId(String id);
 

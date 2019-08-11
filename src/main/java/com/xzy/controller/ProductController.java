@@ -1,5 +1,6 @@
 package com.xzy.controller;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.xzy.beans.Product;
 import com.xzy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ProductController {
     }
     @RequestMapping("/getClasss/{sex}")
     @ResponseBody
-    public List<Product> getClasss(@PathVariable("sex") Integer sex) {
+    public List<Product> getClasss(@PathVariable("sex") String sex) {
         List<Product> productsList = productService.getClasss(sex);
         System.out.println(productsList);
         return productsList;

@@ -30,9 +30,6 @@ public class Product {
 
     private   List<Product>  list1;
 
-
-
-
     public List<Product> getList1() {
         return list1;
     }
@@ -45,7 +42,33 @@ public class Product {
 
     private List<ProductClass> list;
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productPicture='" + productPicture + '\'' +
+                ", productStock=" + productStock +
+                ", productclass=" + productclass +
+                ", browse=" + browse +
+                ", list1=" + list1 +
+                ", list=" + list +
+                ", productComNum=" + productComNum +
+                ", productPrice=" + productPrice +
+                ", productDescribe='" + productDescribe + '\'' +
+                ", productSizePic='" + productSizePic + '\'' +
+                ", productSuperclass='" + productSuperclass + '\'' +
+                ", productClassId='" + productClassId + '\'' +
+                ", productCreatetime=" + productCreatetime +
+                ", productBrand='" + productBrand + '\'' +
+                ", productMaterial='" + productMaterial + '\'' +
+                ", productVersion='" + productVersion + '\'' +
+                ", productStyle='" + productStyle + '\'' +
+                ", productThickness='" + productThickness + '\'' +
+                ", productSize='" + productSize + '\'' +
+                ", productColor='" + productColor + '\'' +
+                '}';
+    }
 
     public List<ProductClass>    getList() {
 

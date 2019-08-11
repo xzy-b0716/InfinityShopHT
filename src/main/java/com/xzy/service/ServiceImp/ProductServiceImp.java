@@ -1,5 +1,6 @@
 package com.xzy.service.ServiceImp;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.xzy.beans.Product;
 import com.xzy.mapper.ProductMapper;
 import com.xzy.service.ProductService;
@@ -26,8 +27,10 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<Product> getClasss(Integer sex) {
+    public List<Product> getClasss(String sex) {
         List<Product> products = productMapper.getClasss(sex);
+
+        System.out.println("server"+products);
         return products;
 
     }

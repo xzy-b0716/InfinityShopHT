@@ -1,5 +1,6 @@
 package com.xzy.service;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.xzy.beans.Product;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface ProductService {
 
     List<Product> recommendNewest();
 
-    List<Product>  getClasss(Integer sex);
+    List<Product>  getClasss(String sex);
 
     List<Product> selectProductByProductClassId(String  id);
 

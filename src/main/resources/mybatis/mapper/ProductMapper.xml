@@ -41,7 +41,7 @@
     <result column="product_price" property="productPrice" jdbcType="REAL" />
     <result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
     <result column="product_size_pic" property="productSizePic" jdbcType="VARCHAR" />
-    <result column="product_superclass" property="productSuperclass" jdbcType="INTEGER" />
+    <result column="product_superclass" property="productSuperclass" jdbcType="CHAR" />
     <result column="product_class_id" property="productClassId" jdbcType="VARCHAR" />
     <result column="product_createtime" property="productCreatetime" jdbcType="TIMESTAMP" />
     <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
@@ -60,13 +60,14 @@
 
 
   <!--根据男女获得商品分类-->
-  <select id="getClasss"  resultMap="getClass">
+  <select id="getClasss"  resultMap="getClass"   >
   SELECT
-   P.product_class_id,PC.product_class_image_path
+  p.product_class_id,pc.product_class_image_path
   from
-  product  P,product_class  PC
-  where  P.product_class_id=PC.product_class_name  and  P.product_superclass=#{sex}
+  product  p,product_class  pc
+  where  p.product_class_id=pc.product_class_id  and  p.product_superclass=#{sex}
   </select>
+
 
 
 
