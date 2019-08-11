@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body text=#000000 bgColor="#ffffff" leftMargin=0 topMargin=4>
+<!--orders的增删改查-->
+<!--<form action="/orders/addO" method="post">
+    ordersId:<input type="text" id="ordersId" name="ordersId"/><br/>
+    ordersTotalPrice:<input type="text" id="ordersTotalPrice" name="ordersTotalPrice"/><br/>
+    ordersPayStatus:<input type="text" id="ordersPayStatus" name="ordersPayStatus"/><br/>
+    ordersSendStatus:<input type="text" id="ordersSendStatus" name="ordersSendStatus"/><br/>
+    ordersGetStatus:<input type="text" id="ordersGetStatus" name="ordersGetStatus"/><br/>
+    ordersCreateTime:<input type="text" id="ordersCreateTime" name="ordersCreateTime"/><br/>
+    ordersSendTime:<input type="text" id="ordersSendTime" name="ordersSendTime"/><br/>
+    ordersGetTime:<input type="text" id="ordersGetTime" name="ordersGetTime"/><br/>
+    userId:<input type="text" id="userId" name="userId"/><br/>
+    addressId:<input type="text" id="addressId" name="addressId"/><br/>
+    <input type="submit" value="addOrders"/>
+</form>
+<a href="/orders/selectO?oId=1">selectOrder</a><br/>
+<a href="/orders/deleteO?oId=2">deleteOrder</a><br/>-->
+
+<!--orderItem的增删改查-->
+<!--<form action="/orderItem/addOI" method="post">
+    orderitemId:<input type="text" id="orderitemId" name="orderitemId"/><br/>
+    oiProductNum:<input type="text" id="oiProductNum" name="oiProductNum"/><br/>
+    oiTotalPrice:<input type="text" id="oiTotalPrice" name="oiTotalPrice"/><br/>
+    productId:<input type="text" id="productId" name="productId"/><br/>
+    ordersId:<input type="text" id="ordersId" name="ordersId"/><br/>
+    <input type="submit" value="addOrderItem"/>
+</form>
+<a href="/orderItem/selectOI?oiId=1">selectOrderItem</a><br/>
+<a href="/orderItem/selectOIByOid?oiId=1">selectOrderItemByOid</a><br/>
+<a href="/orderItem/deleteOI?oiId=1">deleteOrderItem</a><br/>-->
+
+<!--product的增删改查-->
+<!--<a href="/product/findbypid?pId=1">selectOrderItem</a><br/>
+<a href="/product/addPro">selectOrderItem</a><br/>-->
+
+<!--增-->
+<a href="/orderHandle/createOrdersOrderitem01?userId=1&productId=2&addressId=1&num=3&oiProductSize=XL&oiProductColor=YELLOW">单点生成订单</a><br/>
+<a href="/orderHandle/createOrdersOrderitem02?userId=1&addressId=1&ordersTotalPrice=2000">通过购物车生成订单</a><br/>
+<a href="/orderHandle/createOrdersOrderitem03?userId=1&addressId=1&productId=2&oiProductSize=XLL&oiProductColor=BLACK">通过秒杀生成订单</a><br/>
+<!--删-->
+<a href="/orderHandle/deleteOrdersOrderitem?ordersId=5">删除订单及订单项</a><br/>
+<!--改-->
+<a href="/orderHandle/updatePayStatus?ordersId=2">修改支付状态</a><br/>
+<a href="/orderHandle/updateSend?ordersId=7">修改发货状态、添加发货时间</a><br/>
+<a href="/orderHandle/updateGet?ordersId=8">修改收货状态、添加收货时间</a><br/>
+<!--查-->
+<a href="/orderHandle/findAllOrderItem">查询所有订单及订单项</a><br/>
+<a href="/orderHandle/findPayOrderItem">查询未支付订单及订单项</a><br/>
+<a href="/orderHandle/findSendOrderItem">查询未发货订单及订单项</a><br/>
+<a href="/orderHandle/findGetOrderItem">查询未收货订单及订单项</a><br/>
+
+<!--支付模块-->
+<form name="alipayment" action="/orderHandle/alipayIumpSum" method="post">
+    商户订单号: <input id="WIDout_trade_no" name="WIDout_trade_no" type="text"/><br/>
+    订单名称：<input id="WIDsubject" name="WIDsubject"  type="text"/><br/>
+    付款金额：<input id="WIDtotal_amount" name="WIDtotal_amount" type="text"/><br/>
+    商品描述：<input id="WIDbody" name="WIDbody" type="text"/><br/>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
