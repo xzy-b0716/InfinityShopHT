@@ -11,8 +11,8 @@ public interface ProductDiscussMapper {
      *
      * @mbggenerated
      */
-    //查询评论条数（根据订单id查询）
-    Integer countDiscuss(Integer ProductId);
+    //查询评论条数
+    Integer countDiscuss(Integer productId);
 
     int deleteByPrimaryKey(Integer productDiscussId);
 

@@ -23,7 +23,7 @@
 
   <!--//查询评论条数-->
   <select id="countDiscuss" parameterType="Integer" resultType="Integer">
-        select count(*) from product_discuss where product_id=#{ProductId}
+        select count(*) from product_discuss where product_id=#{productId}
     </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--

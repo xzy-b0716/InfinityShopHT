@@ -53,9 +53,6 @@
     <result column="browse_time" property="browseTime"/>
     <result column="user_id" property="userId"/>
     <result column="product_id" property="productId"/>
-    <association property="product" javaType="com.xzy.beans.Product">
-      <result column="product_picture" property="productPicture" jdbcType="VARCHAR" />
-    </association>
   </resultMap>
   <!--更新用户历史记录表-->
   <update id="updateHistory" parameterType="com.xzy.beans.Browse">
@@ -66,13 +63,13 @@
         INSERT INTO browse (browse_time,user_id,product_id) VALUES (#{browseTime},#{userId},#{productId})
     </insert>
   <!--根据用户id查询浏览记录-->
-  <select id="selectHistoryByUserId" parameterType="Integer" resultMap="com.xzy.beans.Browse">
-        SELECT b.*,product_picture FROM browse b,product p
-         WHERE p.product_id = b.product_id and user_id=#{userId} order by browse_time desc
+  <select id="selectHistoryByUserId" parameterType="Integer" resultMap="userHistory">
+        SELECT b.* FROM browse b
+         WHERE  user_id=#{userId} order by browse_time desc
     </select>
   <!--根据用户id和商品id查询浏览记录-->
-  <select id="selectHistoryByUserIdAndProductId" parameterType="com.xzy.beans.Browse" resultMap="com.xzy.beans.Browse">
-        SELECT b.*,product_picture FROM browse b, product p WHERE p.product_id = b.product_id and user_id=#{userId} AND product_id=#{productId}
+  <select id="selectHistoryByUserIdAndProductId" parameterType="com.xzy.beans.Browse" resultMap="userHistory">
+        SELECT b.* FROM browse b WHERE  user_id=#{userId} AND product_id=#{productId}
     </select>
   <!--删除一条浏览记录-->
   <delete id="deleteHistory" >
