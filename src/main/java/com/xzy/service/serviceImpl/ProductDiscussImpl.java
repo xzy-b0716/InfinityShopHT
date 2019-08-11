@@ -16,11 +16,13 @@ public class ProductDiscussImpl implements ProductDiscussService {
     @Autowired
     private ProductDiscussMapper productDiscussMapper;
     @Override
+//    商品评论的总数
     public Integer countDiscuss(Integer ProductId) {
         return productDiscussMapper.countDiscuss(ProductId);
     }
 
     @Override
+//    添加评论
     public void insertDiscuss(ProductDiscuss productDiscuss) {
 
         productDiscussMapper.insertSelective(productDiscuss);

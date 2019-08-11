@@ -13,6 +13,7 @@ public class CollectServiceImpl implements CollectService {
     @Autowired
     private CollectMapper collectMapper;
     @Override
+//    商品是否收藏
     public Integer isCollect(Integer productId, Integer userId) {
         return collectMapper.isLike(productId,userId);
     }
