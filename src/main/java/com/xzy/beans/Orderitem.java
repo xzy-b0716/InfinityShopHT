@@ -75,5 +75,4 @@ public class Orderitem {
     public void setOiProductColor(String oiProductColor) {
         this.oiProductColor = oiProductColor;
     }
-
 }
