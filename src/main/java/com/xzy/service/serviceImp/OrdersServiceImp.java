@@ -1,10 +1,10 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 import com.xzy.beans.Orders;
 import com.xzy.beans.Product;
 import com.xzy.beans.Seckill;
 import com.xzy.mapper.OrdersMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xzy.service.OrdersService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,11 +12,12 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class OrdersServiceImp {
+public class OrdersServiceImp implements OrdersService {
     @Resource
     private OrdersMapper om;
 
     //单点购买增加(生成)订单
+    @Override
     public int addOrderBy01(/*HttpServletRequest hsr*/int userId, int addressId, int productId, int num) {
         //通过ssesion拿到用户名
         /*Users user = new Users();
@@ -52,6 +53,7 @@ public class OrdersServiceImp {
     }
 
     //通过购物车增加(生成)订单
+    @Override
     public int addOrderBy02(int userId, int addressId, float ordersTotalPrice){
         Orders order = new Orders();
 
@@ -71,6 +73,7 @@ public class OrdersServiceImp {
     }
 
     //通过秒杀增加(生成)订单
+    @Override
     public int addOrderBy03(int userId, int addressId, int productId){
         Orders order = new Orders();
 
@@ -91,18 +94,21 @@ public class OrdersServiceImp {
     }
 
     //删除订单
+    @Override
     public int deleteOrders(int OrdersId){
         int i = om.deleteByPrimaryKey(OrdersId);
         return i;
     }
 
     //修改支付状态
+    @Override
     public int updatePayStatus(int ordersId){
         int payStatus = om.updatePayStatus(ordersId);
         return payStatus;
     }
 
     //修改发货状态、添加发货时间
+    @Override
     public int updateSend(int ordersId){
         int payStutas = om.findPayStutas(ordersId);
         if(payStutas == 1){
@@ -115,6 +121,7 @@ public class OrdersServiceImp {
     }
 
     //修改收货状态、添加收货时间
+    @Override
     public int updateGet(int ordersId){
         int sendStutas = om.findSendStutas(ordersId);
         if(sendStutas == 1) {
@@ -127,24 +134,28 @@ public class OrdersServiceImp {
     }
 
     //查询所有订单的ordersId
+    @Override
     public List<Integer> findAllOrdId(){
         List<Integer> allOrdId = om.findAllOrdId();
         return allOrdId;
     }
 
     //查询待支付订单
+    @Override
     public List<Integer> findPay(){
         List<Integer> ordPay = om.findPay();
         return ordPay;
     }
 
     //查询待发货订单
+    @Override
     public List<Integer> findSend(){
         List<Integer> ordSend = om.findSend();
         return ordSend;
     }
 
     //查询待收货订单
+    @Override
     public List<Integer> findGet(){
         List<Integer> ordGet = om.findGet();
         return ordGet;

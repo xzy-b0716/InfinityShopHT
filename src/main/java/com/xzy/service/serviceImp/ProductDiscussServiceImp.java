@@ -1,4 +1,4 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 import com.xzy.mapper.ProductDiscussMapper;
 import com.xzy.service.ProductDiscussService;

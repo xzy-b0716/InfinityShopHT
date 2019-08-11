@@ -86,18 +86,6 @@ public class CartController {
     }
 
 
- /*   public List<CartItem> selectAllCartItem ( HttpServletRequest request, HttpSession session)
-  {
-    User user= (User)session.getAttribute("user");
-    if (user!=null){
-        Integer  id=user.getUserId();
-        List<CartItem> cartItems = cartservice.selectAllCartItemByOneUser(id);
-
-        return cartItems;
-    }else {
-        return null;
-    }
-  }*/
 
 
 }

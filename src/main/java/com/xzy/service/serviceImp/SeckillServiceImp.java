@@ -1,8 +1,7 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 import com.xzy.beans.Seckill;
 import com.xzy.beans.SuccessKillPro;
-import com.xzy.beans.SuccessKilled;
 import com.xzy.beans.cache.RedisBean;
 import com.xzy.controller.SuccessKilledController;
 import com.xzy.dto.Exposer;
@@ -22,8 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 

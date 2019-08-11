@@ -1,4 +1,4 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 
 import com.xzy.beans.Cart;
@@ -6,7 +6,7 @@ import com.xzy.beans.Orderitem;
 import com.xzy.beans.Product;
 import com.xzy.beans.Seckill;
 import com.xzy.mapper.OrderitemMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xzy.service.OrderItemService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,11 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class OrderItemServiceImp {
+public class OrderItemServiceImp implements OrderItemService {
     @Resource
     private OrderitemMapper oim;
 
    //单点购买增加(生成)订单项
+   @Override
    public int addOrderItemBy01(int productId, int num, int ordersId, String oiProductSize, String oiProductColor){
        //得到商品
        Product product = oim.findProByOiId(productId);
@@ -44,6 +45,7 @@ public class OrderItemServiceImp {
    }
 
    //通过购物车增加(生成)订单项
+   @Override
    public int addOrderItemBy02(int userId, int ordersId){
         //拿到购物车里所有的商品
         List<Cart> carts = oim.findCartByUserid(userId);
@@ -78,6 +80,7 @@ public class OrderItemServiceImp {
    }
 
    //通过秒杀增加(生成)订单项
+   @Override
    public int addOrderItemBy03(int ordersId, int productId, String oiProductSize, String oiProductColor){
        Seckill seckill = oim.findSecByPId(productId);
        if(seckill.getSeckillStock()>0){
@@ -103,12 +106,14 @@ public class OrderItemServiceImp {
    }
 
     //删除订单项
+    @Override
     public int deleteOrderitem(int OrdersId){
         int i = oim.deleteOrderitemByOrdersId(OrdersId);
         return i;
     }
 
     //查询所有订单项
+    @Override
     public List<Orderitem> findAllOIByOrdId(int ordersId){
         List<Orderitem> orderitems = oim.findOIByordId(ordersId);
         return orderitems;

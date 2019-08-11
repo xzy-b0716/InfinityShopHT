@@ -1,7 +1,7 @@
 package com.xzy.controller;
 
 import com.xzy.beans.Product;
-import com.xzy.service.ServiceImp.ProductServiceImp;
+import com.xzy.service.serviceImp.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,6 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 import com.xzy.beans.SuccessKillPro;
-import com.xzy.beans.SuccessKilled;
 import com.xzy.mapper.SuccessKilledMapper;
 import com.xzy.service.SuccessKilledService;
 import org.springframework.stereotype.Service;

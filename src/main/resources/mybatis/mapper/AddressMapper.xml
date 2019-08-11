@@ -11,7 +11,7 @@
     <result column="address_user_tel" property="addressUserTel" jdbcType="VARCHAR" />
     <result column="address_a" property="addressA" jdbcType="VARCHAR" />
     <result column="address_pcode" property="addressPcode" jdbcType="VARCHAR" />
-    <result column="address_defalut" property="addressDefalut" jdbcType="INTEGER" />
+    <result column="address_defalut" property="addressDefalut" jdbcType="TINYINT" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -32,6 +32,20 @@
     from address
     where address_id = #{addressId,jdbcType=INTEGER}
   </select>
+  
+  <!--查询所有-->
+  <select id="selectUserAllAddress" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   SELECT
+   <include refid="Base_Column_List"/>
+   FROM
+   `address` a
+    <where>
+     <if test="id != null">
+       and a.`user_id` = #{userId}
+     </if>
+   </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -49,7 +63,7 @@
       address_a, address_pcode, address_defalut, 
       user_id)
     values (#{addressId,jdbcType=INTEGER}, #{addressUserName,jdbcType=VARCHAR}, #{addressUserTel,jdbcType=VARCHAR}, 
-      #{addressA,jdbcType=VARCHAR}, #{addressPcode,jdbcType=VARCHAR}, #{addressDefalut,jdbcType=INTEGER}, 
+      #{addressA,jdbcType=VARCHAR}, #{addressPcode,jdbcType=VARCHAR}, #{addressDefalut,jdbcType=TINYINT},
       #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xzy.beans.Address" >
@@ -98,7 +112,7 @@
         #{addressPcode,jdbcType=VARCHAR},
       </if>
       <if test="addressDefalut != null" >
-        #{addressDefalut,jdbcType=INTEGER},
+        #{addressDefalut,jdbcType=TINYINT},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
@@ -125,7 +139,7 @@
         address_pcode = #{addressPcode,jdbcType=VARCHAR},
       </if>
       <if test="addressDefalut != null" >
-        address_defalut = #{addressDefalut,jdbcType=INTEGER},
+        address_defalut = #{addressDefalut,jdbcType=TINYINT},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -143,7 +157,7 @@
       address_user_tel = #{addressUserTel,jdbcType=VARCHAR},
       address_a = #{addressA,jdbcType=VARCHAR},
       address_pcode = #{addressPcode,jdbcType=VARCHAR},
-      address_defalut = #{addressDefalut,jdbcType=INTEGER},
+      address_defalut = #{addressDefalut,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=INTEGER}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
