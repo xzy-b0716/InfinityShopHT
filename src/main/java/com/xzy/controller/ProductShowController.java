@@ -1,6 +1,8 @@
 package com.xzy.controller;
 
 import com.xzy.beans.ProductShow;
+import com.xzy.common.ServerResponse;
+import com.xzy.common.ResponseCode;
 import com.xzy.service.CollectService;
 import com.xzy.service.ProductDiscussService;
 import com.xzy.service.ProductShowService;
@@ -20,24 +22,27 @@ public class ProductShowController {
     private ProductDiscussService productDiscussService;
     @Autowired
     private CollectService collectService;
+
     @RequestMapping("/productAll")
-    public ProductShow productAll( Integer productId,Integer userId)  {
-        if(productId==null||productId.equals("")) {
-            return null;
+    public ServerResponse productAll(Integer productId, Integer userId) {
+        if (productId == null || productId.equals("")) {
+            String msg = "productId为空或者为null";
+            return ServerResponse.createByErrorMessage(msg);
         }
-        if( productService.selectProductAll(productId)!=null) {
-            ProductShow p = productService.selectProductAll(productId);
-            int num = collectService.isCollect(productId, userId);
-            boolean like = false;
-            if (num == 1) {
-                like = true;
-            }
-            p.setDiscussCount(productDiscussService.countDiscuss(productId));
-            p.setCollect(like);
-            return p;
-        }else{
-            return null;
+        ProductShow p = productService.selectProductAll(productId);
+        int num = collectService.isCollect(productId, userId);
+        boolean like = false;
+        if (num == 1) {
+            like = true;
         }
+        p.setCollect(like);
+        int count = productDiscussService.countDiscuss(productId);
+        p.setDiscussCount(productDiscussService.countDiscuss(productId));
+        if (count == 0) {
+            p.setProductDiscuss(null);
+        }
+        return ServerResponse.createBySuccess(p);
+
     }
 
 }

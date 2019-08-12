@@ -42,10 +42,13 @@
     </collection>
   </resultMap>
   <select  resultMap="queryProduct" id="selectAllByProductId" >
-       SELECT p.*,`color`,`size`,`path`,produc_discuss_comment,pd_createtime,user_name
-       FROM product p , product_size ps, product_color pc,  product_discuss pdi,`user`  u ,carousel c
-       WHERE p.`product_id`=ps.`product_id` AND p.`product_id`=pc.`product_id` AND p.`product_id`=pdi.`product_id`
-        AND p.`product_id`=c.`product_id` AND u.user_id = pdi.user_id AND  p.`product_id`=#{productId} ;
+        SELECT p.*,`color`,`size`,`path`,produc_discuss_comment,pd_createtime,user_name
+  FROM (product p ,`user`  u )
+  LEFT JOIN product_size ps ON (ps.`product_id`=p.`product_id`)
+  LEFT JOIN product_color pc ON (pc.`product_id`=p.`product_id`)
+  LEFT JOIN product_discuss pdi ON (pdi.`product_id`=p.`product_id`)
+  LEFT JOIN carousel c ON (c.`product_id`=p.`product_id`)
+  WHERE  p.`product_id` =#{productId}
 </select>
   <!--根据商品id查询用户浏览记录表-->
   <resultMap id="userHistory" type="com.xzy.beans.Browse">
