@@ -11,26 +11,25 @@ public class Collect {
 
 
 
-    private  Integer  state;
-
+    private  Integer  State;
 
     public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
+        return State;
     }
 
     @Override
     public String toString() {
         return "Collect{" +
                 "collectId=" + collectId +
-                ", state=" + state +
+                ", State=" + State +
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", browse=" + browse +
                 '}';
+    }
+
+    public void setState(Integer state) {
+        State = state;
     }
 
     private Integer userId;

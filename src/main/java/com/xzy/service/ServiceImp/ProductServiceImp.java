@@ -54,7 +54,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product>  selectCollectByUserId(Integer  id){
-        List<Product> products = productMapper. selectCollectByUserId(id);
+        List<Product> products = productMapper. selectCollectByUserId( id);
         return  products;
     }
 

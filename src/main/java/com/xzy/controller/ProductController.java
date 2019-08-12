@@ -54,16 +54,16 @@ public class ProductController {
         System.out.println(productsList);
         return productsList;
     }
-    @RequestMapping("/selectHistoryByUserId")
+    @RequestMapping("/selectHistoryByUserId/{id}")
     @ResponseBody
     public   List<Product> selectHistoryByUserId(@PathVariable("id") Integer  id){
         List<Product> productsList = productService.selectHistoryByUserId(id);
         System.out.println(productsList);
         return productsList;
     }
-    @RequestMapping("/selectCollectByUserId")
+    @RequestMapping("/selectCollectByUserId/{id}")
     @ResponseBody
-    public   List<Product> selectCollectByUserId(@PathVariable("id") Integer  id){
+    public   List<Product> selectCollectByUserId(@PathVariable("id")Integer  id){
         List<Product> productsList = productService.selectCollectByUserId(id);
         System.out.println(productsList);
         return productsList;
