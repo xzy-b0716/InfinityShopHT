@@ -4,6 +4,7 @@ import com.xzy.beans.Information;
 import com.xzy.beans.Seckill;
 import com.xzy.service.InformationService;
 import com.xzy.service.ProductDiscussService;
+import com.xzy.service.ProductService;
 import com.xzy.service.SecProductService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import javax.annotation.Resource;
 @RestController
 public class SecProductController {
     @Resource
+    private ProductService productService;
+    @Resource
     private InformationService informationService;
     @Resource
     private SecProductService secProductService;
@@ -23,6 +26,7 @@ public class SecProductController {
     @RequestMapping("queryAll/{productId}")
     public Seckill queryByProductId(@PathVariable("productId") Integer productId) {
         Seckill seckill = secProductService.queryByProductId(productId);
+        seckill.setLike(productService.selectClassProductByProductId(productId));
         seckill.setInformation(informationService.selectInformation(productId));
         seckill.setCountDiscuss(productDiscussService.countDiscuss(productId));
         return seckill;

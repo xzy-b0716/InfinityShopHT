@@ -6,6 +6,7 @@ import com.xzy.service.SecProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @Service
 public class SecProductServiceImp implements SecProductService {

@@ -4,8 +4,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class Seckill {
+
+    private List<Product> like;
+
+    public List<Product> getLike() {
+        return like;
+    }
+
+    public void setLike(List<Product> like) {
+        this.like = like;
+    }
 
     private int countDiscuss;
 
