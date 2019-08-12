@@ -23,21 +23,5 @@ public class ProductDiscussController {
         Integer count= productDiscussService.countDiscuss(productId);
         return count;
     }
-    @RequestMapping("/insertDiscuss")
-    public Object insertDiscuss(HttpSession session,ProductDiscuss productDiscuss1)
-    {
-        User user=(User) session.getAttribute("user");
-        if (user==null)
-        {
-            return "请您登陆";
-        }
-        ProductDiscuss productDiscuss=new ProductDiscuss();
-        productDiscuss.setProducDiscussComment(productDiscuss1.getProducDiscussComment());
-        productDiscuss.setProductId(productDiscuss1.getProductId());
-        productDiscuss.setUser(productDiscuss1.getUser());
 
-        //上传评论到数据库
-        return null;
-
-    }
 }

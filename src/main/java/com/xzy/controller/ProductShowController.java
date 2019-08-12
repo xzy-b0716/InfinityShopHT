@@ -20,9 +20,8 @@ public class ProductShowController {
     private ProductDiscussService productDiscussService;
     @Autowired
     private CollectService collectService;
-    @RequestMapping("/ProductAll/{productId}")
-    public ProductShow ProductAll(@PathVariable("productId") Integer productId)  {
-        int userId=1;
+    @RequestMapping("/productAll")
+    public ProductShow productAll( Integer productId,Integer userId)  {
         if(productId==null||productId.equals("")) {
             return null;
         }
