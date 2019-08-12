@@ -7,8 +7,12 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.xzy.beans.Orderitem;
 import com.xzy.config.AlipayConfig;
+import com.xzy.service.OrderItemService;
+import com.xzy.service.OrdersService;
+import com.xzy.service.ProductService;
 import com.xzy.service.serviceImp.OrderItemServiceImp;
 import com.xzy.service.serviceImp.OrdersServiceImp;
+import com.xzy.service.serviceImp.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +26,11 @@ import java.util.*;
 @RequestMapping("/orderHandle")
 public class OrderHandleController {
     @Autowired
-    private OrdersServiceImp os;
+    private OrdersService os;
     @Autowired
-    private OrderItemServiceImp ois;
+    private OrderItemService ois;
     @Autowired
-    private ProductServiceImp ps;
+    private ProductService ps;
 
     /*
     增（完成）
