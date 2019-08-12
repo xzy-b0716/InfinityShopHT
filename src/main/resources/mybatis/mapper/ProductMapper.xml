@@ -22,8 +22,6 @@
     <result column="product_version" property="productVersion" jdbcType="VARCHAR" />
     <result column="product_style" property="productStyle" jdbcType="VARCHAR" />
     <result column="product_thickness" property="productThickness" jdbcType="VARCHAR" />
-    <result column="product_size" property="productSize" jdbcType="VARCHAR" />
-    <result column="product_color" property="productColor" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
@@ -32,8 +30,7 @@
     -->
     product_id, product_name, product_picture, product_stock, product_com_num, product_price, 
     product_describe, product_size_pic, product_superclass, product_class_id, product_createtime, 
-    product_brand, product_material, product_version, product_style, product_thickness, 
-    product_size, product_color
+    product_brand, product_material, product_version, product_style, product_thickness
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
@@ -63,14 +60,14 @@
       product_describe, product_size_pic, product_superclass, 
       product_class_id, product_createtime, product_brand, 
       product_material, product_version, product_style, 
-      product_thickness, product_size, product_color
+      product_thickness
       )
     values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productPicture,jdbcType=VARCHAR}, 
       #{productStock,jdbcType=INTEGER}, #{productComNum,jdbcType=INTEGER}, #{productPrice,jdbcType=REAL}, 
       #{productDescribe,jdbcType=VARCHAR}, #{productSizePic,jdbcType=VARCHAR}, #{productSuperclass,jdbcType=CHAR}, 
       #{productClassId,jdbcType=VARCHAR}, #{productCreatetime,jdbcType=TIMESTAMP}, #{productBrand,jdbcType=VARCHAR}, 
       #{productMaterial,jdbcType=VARCHAR}, #{productVersion,jdbcType=VARCHAR}, #{productStyle,jdbcType=VARCHAR}, 
-      #{productThickness,jdbcType=VARCHAR}, #{productSize,jdbcType=VARCHAR}, #{productColor,jdbcType=VARCHAR}
+      #{productThickness,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xzy.beans.Product" >
@@ -128,12 +125,6 @@
       <if test="productThickness != null" >
         product_thickness,
       </if>
-      <if test="productSize != null" >
-        product_size,
-      </if>
-      <if test="productColor != null" >
-        product_color,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
@@ -183,12 +174,6 @@
       </if>
       <if test="productThickness != null" >
         #{productThickness,jdbcType=VARCHAR},
-      </if>
-      <if test="productSize != null" >
-        #{productSize,jdbcType=VARCHAR},
-      </if>
-      <if test="productColor != null" >
-        #{productColor,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -244,12 +229,6 @@
       <if test="productThickness != null" >
         product_thickness = #{productThickness,jdbcType=VARCHAR},
       </if>
-      <if test="productSize != null" >
-        product_size = #{productSize,jdbcType=VARCHAR},
-      </if>
-      <if test="productColor != null" >
-        product_color = #{productColor,jdbcType=VARCHAR},
-      </if>
     </set>
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
@@ -273,9 +252,7 @@
       product_material = #{productMaterial,jdbcType=VARCHAR},
       product_version = #{productVersion,jdbcType=VARCHAR},
       product_style = #{productStyle,jdbcType=VARCHAR},
-      product_thickness = #{productThickness,jdbcType=VARCHAR},
-      product_size = #{productSize,jdbcType=VARCHAR},
-      product_color = #{productColor,jdbcType=VARCHAR}
+      product_thickness = #{productThickness,jdbcType=VARCHAR}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
 </mapper>

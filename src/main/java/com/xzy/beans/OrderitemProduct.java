@@ -1,7 +1,6 @@
 package com.xzy.beans;
 
-public class Orderitem {
-
+public class OrderitemProduct {
     private Integer orderitemId;
     private Integer oiProductNum;
     private Float oiTotalPrice;
@@ -9,6 +8,8 @@ public class Orderitem {
     private Integer ordersId;
     private String oiProductSize;
     private String oiProductColor;
+    private String productName;
+    private String productPicture;
 
     public Integer getOrderitemId() {
         return orderitemId;
@@ -64,5 +65,21 @@ public class Orderitem {
 
     public void setOiProductColor(String oiProductColor) {
         this.oiProductColor = oiProductColor;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductPicture() {
+        return productPicture;
+    }
+
+    public void setProductPicture(String productPicture) {
+        this.productPicture = productPicture;
     }
 }
