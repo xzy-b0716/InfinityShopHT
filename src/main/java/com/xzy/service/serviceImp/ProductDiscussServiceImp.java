@@ -1,5 +1,6 @@
 package com.xzy.service.serviceImp;
 
+import com.xzy.beans.ProductDiscuss;
 import com.xzy.mapper.ProductDiscussMapper;
 import com.xzy.service.ProductDiscussService;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,5 @@ public class ProductDiscussServiceImp implements ProductDiscussService {
     public int countDiscuss(Integer productId) {
         return productDiscussMapper.countDiscuss(productId);
     }
+
 }

@@ -99,10 +99,6 @@ public class User {
     }
 
 
-    public void setUserCreat(Date userCreat) {
-        this.userCreat = userCreat;
-    }
-
 
     public String getUserReal() {
         return userReal;

@@ -1,4 +1,8 @@
 package com.xzy.service;
+import com.xzy.beans.ProductDiscuss;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * @author cairunduo
@@ -6,4 +10,5 @@ package com.xzy.service;
  */
 public interface ProductDiscussService {
     public int countDiscuss(Integer productId);
+
 }
