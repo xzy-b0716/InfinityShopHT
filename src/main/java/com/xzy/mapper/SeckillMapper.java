@@ -56,6 +56,7 @@ public interface SeckillMapper {
 
     /**
      * 减库存，只考虑秒杀商品的库存
+     *
      * @param killTime 当前秒杀时间
      */
     int reduceNumber(Integer productId, Date killTime);

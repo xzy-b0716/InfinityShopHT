@@ -30,7 +30,6 @@ public class Carousel {
      * This method returns the value of the database column carousel.carousel_id
      *
      * @return the value of carousel.carousel_id
-     *
      * @mbggenerated
      */
     public Integer getCarouselId() {
@@ -42,7 +41,6 @@ public class Carousel {
      * This method sets the value of the database column carousel.carousel_id
      *
      * @param carouselId the value for carousel.carousel_id
-     *
      * @mbggenerated
      */
     public void setCarouselId(Integer carouselId) {
@@ -54,7 +52,6 @@ public class Carousel {
      * This method returns the value of the database column carousel.path
      *
      * @return the value of carousel.path
-     *
      * @mbggenerated
      */
     public String getPath() {
@@ -66,7 +63,6 @@ public class Carousel {
      * This method sets the value of the database column carousel.path
      *
      * @param path the value for carousel.path
-     *
      * @mbggenerated
      */
     public void setPath(String path) {
@@ -78,7 +74,6 @@ public class Carousel {
      * This method returns the value of the database column carousel.product_id
      *
      * @return the value of carousel.product_id
-     *
      * @mbggenerated
      */
     public Integer getProductId() {
@@ -90,7 +85,6 @@ public class Carousel {
      * This method sets the value of the database column carousel.product_id
      *
      * @param productId the value for carousel.product_id
-     *
      * @mbggenerated
      */
     public void setProductId(Integer productId) {

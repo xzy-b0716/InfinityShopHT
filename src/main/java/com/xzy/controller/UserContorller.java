@@ -27,13 +27,14 @@ public class UserContorller {
 
     /**
      * 获取当前用户的信息
+     *
      * @param session
      * @return
      */
-    @RequestMapping(value = "getUser.do",method = RequestMethod.POST)
-    public User getUser(HttpSession session){
+    @RequestMapping(value = "getUser.do", method = RequestMethod.POST)
+    public User getUser(HttpSession session) {
         User user = (User) session.getAttribute(Cont.CURRENT_USER);
-        if (user!= null){
+        if (user != null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         return user;
@@ -41,14 +42,15 @@ public class UserContorller {
 
     /**
      * 修改头像
+     *
      * @param session
      * @param picFile
      * @return
      */
-    @RequestMapping(value = "updateUserPic.do",method = RequestMethod.POST)
-    public Object updateUserPic(HttpSession session , MultipartFile picFile){
+    @RequestMapping(value = "updateUserPic.do", method = RequestMethod.POST)
+    public Object updateUserPic(HttpSession session, MultipartFile picFile) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
 
@@ -58,14 +60,15 @@ public class UserContorller {
 
     /**
      * 修改用户昵称
+     *
      * @param session
      * @param real
      * @return
      */
-    @RequestMapping(value = "updateUserReal.do",method = RequestMethod.POST)
-    public int updateUserReal(HttpSession session,String real){
+    @RequestMapping(value = "updateUserReal.do", method = RequestMethod.POST)
+    public int updateUserReal(HttpSession session, String real) {
         User user1 = (User) session.getAttribute(Cont.CURRENT_USER);
-        if (user1 == null){
+        if (user1 == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         user1.setUserReal(real);
@@ -76,14 +79,15 @@ public class UserContorller {
 
     /**
      * 修改密码
+     *
      * @param session
      * @param password
      * @return
      */
-    @RequestMapping(value = "updateUserPwd.do",method = RequestMethod.POST)
-    public int updateUserPwd(HttpSession session,String password){
+    @RequestMapping(value = "updateUserPwd.do", method = RequestMethod.POST)
+    public int updateUserPwd(HttpSession session, String password) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
 
@@ -93,14 +97,15 @@ public class UserContorller {
 
     /**
      * 修改邮箱
+     *
      * @param session
      * @param email
      * @return
      */
-    @RequestMapping(value = "updateUserEmail.do",method = RequestMethod.POST)
-    public int updateUserEmail(HttpSession session,String email){
+    @RequestMapping(value = "updateUserEmail.do", method = RequestMethod.POST)
+    public int updateUserEmail(HttpSession session, String email) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         int updateEmail = userService.updateEmail(user.getUserId(), email);
@@ -109,14 +114,15 @@ public class UserContorller {
 
     /**
      * 修改电话号码
+     *
      * @param session
      * @param userTel
      * @return
      */
-    @RequestMapping(value = "updateUserTel.do",method = RequestMethod.POST)
-    public int updateUserTel(HttpSession session,String userTel){
+    @RequestMapping(value = "updateUserTel.do", method = RequestMethod.POST)
+    public int updateUserTel(HttpSession session, String userTel) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         int updateTel = userService.updateTel(user.getUserId(), userTel);
@@ -125,14 +131,15 @@ public class UserContorller {
 
     /**
      * 修改生日
+     *
      * @param session
      * @param userBirth
      * @return
      */
-    @RequestMapping(value = "updateBirth.do",method = RequestMethod.POST)
-    public int updateBirth(HttpSession session, Date userBirth){
+    @RequestMapping(value = "updateBirth.do", method = RequestMethod.POST)
+    public int updateBirth(HttpSession session, Date userBirth) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         int updateBirth = userService.updateUserBirth(user.getUserId(), userBirth);
@@ -141,14 +148,15 @@ public class UserContorller {
 
     /**
      * 修改性别
+     *
      * @param session
      * @param userSex
      * @return
      */
-    @RequestMapping(value = "updateSex.do",method = RequestMethod.POST)
-    public int updateSex(HttpSession session,String userSex){
+    @RequestMapping(value = "updateSex.do", method = RequestMethod.POST)
+    public int updateSex(HttpSession session, String userSex) {
         User user = getUser(session);
-        if (user==null){
+        if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
         int updateSex = userService.updateUserSex(user.getUserId(), userSex);

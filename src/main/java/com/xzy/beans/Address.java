@@ -62,7 +62,6 @@ public class Address {
      * This method returns the value of the database column address.address_id
      *
      * @return the value of address.address_id
-     *
      * @mbggenerated
      */
     public Integer getAddressId() {
@@ -74,7 +73,6 @@ public class Address {
      * This method sets the value of the database column address.address_id
      *
      * @param addressId the value for address.address_id
-     *
      * @mbggenerated
      */
     public void setAddressId(Integer addressId) {
@@ -86,7 +84,6 @@ public class Address {
      * This method returns the value of the database column address.address_user_name
      *
      * @return the value of address.address_user_name
-     *
      * @mbggenerated
      */
     public String getAddressUserName() {
@@ -98,7 +95,6 @@ public class Address {
      * This method sets the value of the database column address.address_user_name
      *
      * @param addressUserName the value for address.address_user_name
-     *
      * @mbggenerated
      */
     public void setAddressUserName(String addressUserName) {
@@ -110,7 +106,6 @@ public class Address {
      * This method returns the value of the database column address.address_user_tel
      *
      * @return the value of address.address_user_tel
-     *
      * @mbggenerated
      */
     public String getAddressUserTel() {
@@ -122,7 +117,6 @@ public class Address {
      * This method sets the value of the database column address.address_user_tel
      *
      * @param addressUserTel the value for address.address_user_tel
-     *
      * @mbggenerated
      */
     public void setAddressUserTel(String addressUserTel) {
@@ -134,7 +128,6 @@ public class Address {
      * This method returns the value of the database column address.address_a
      *
      * @return the value of address.address_a
-     *
      * @mbggenerated
      */
     public String getAddressA() {
@@ -146,7 +139,6 @@ public class Address {
      * This method sets the value of the database column address.address_a
      *
      * @param addressA the value for address.address_a
-     *
      * @mbggenerated
      */
     public void setAddressA(String addressA) {
@@ -158,7 +150,6 @@ public class Address {
      * This method returns the value of the database column address.address_pcode
      *
      * @return the value of address.address_pcode
-     *
      * @mbggenerated
      */
     public String getAddressPcode() {
@@ -170,7 +161,6 @@ public class Address {
      * This method sets the value of the database column address.address_pcode
      *
      * @param addressPcode the value for address.address_pcode
-     *
      * @mbggenerated
      */
     public void setAddressPcode(String addressPcode) {
@@ -182,7 +172,6 @@ public class Address {
      * This method returns the value of the database column address.address_defalut
      *
      * @return the value of address.address_defalut
-     *
      * @mbggenerated
      */
     public Boolean getAddressDefalut() {
@@ -194,7 +183,6 @@ public class Address {
      * This method sets the value of the database column address.address_defalut
      *
      * @param addressDefalut the value for address.address_defalut
-     *
      * @mbggenerated
      */
     public void setAddressDefalut(Boolean addressDefalut) {
@@ -206,7 +194,6 @@ public class Address {
      * This method returns the value of the database column address.user_id
      *
      * @return the value of address.user_id
-     *
      * @mbggenerated
      */
     public Integer getUserId() {
@@ -218,7 +205,6 @@ public class Address {
      * This method sets the value of the database column address.user_id
      *
      * @param userId the value for address.user_id
-     *
      * @mbggenerated
      */
     public void setUserId(Integer userId) {

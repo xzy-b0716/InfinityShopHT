@@ -40,10 +40,10 @@ public class OrderHandleController {
     //单点生成订单及订单项
     @RequestMapping("/createOrdersOrderitem01")
     public String createOrdersOrderitem01(int userId, int productId, int addressId, int num,
-                                     String oiProductSize, String oiProductColor){
+                                          String oiProductSize, String oiProductColor) {
         int ordersId = os.addOrderBy01(userId, addressId, productId, num);
         int i = ois.addOrderItemBy01(productId, num, ordersId, oiProductSize, oiProductColor);
-        if(i == 1){
+        if (i == 1) {
             return "单点生成订单成功";
         } else {
             return "单点生成订单失败";
@@ -52,7 +52,7 @@ public class OrderHandleController {
 
     //通过购物车生成订单及订单
     @RequestMapping("/createOrdersOrderitem02")
-    public String createOrdersOrderitem02(int userId, int addressId, float ordersTotalPrice){
+    public String createOrdersOrderitem02(int userId, int addressId, float ordersTotalPrice) {
         int ordersId = os.addOrderBy02(userId, addressId, ordersTotalPrice);
         int i = ois.addOrderItemBy02(userId, ordersId);
         return "通过购物车生成订单成功";
@@ -60,10 +60,10 @@ public class OrderHandleController {
 
     //通过秒杀生成订单及订单
     @RequestMapping("/createOrdersOrderitem03")
-    public String createOrdersOrderitem03(int userId, int addressId, int productId, String oiProductSize, String oiProductColor){
+    public String createOrdersOrderitem03(int userId, int addressId, int productId, String oiProductSize, String oiProductColor) {
         int orderId = os.addOrderBy03(userId, addressId, productId);
         int i = ois.addOrderItemBy03(orderId, productId, oiProductSize, oiProductColor);
-        if(i == 1){
+        if (i == 1) {
             return "通过秒杀生成订单成功";
         } else {
             return "通过秒杀生成订单失败";
@@ -75,7 +75,7 @@ public class OrderHandleController {
      */
     //删除订单及订单项
     @RequestMapping("/deleteOrdersOrderitem")
-    public String deleteOrdersOrderitem(int ordersId){
+    public String deleteOrdersOrderitem(int ordersId) {
         os.deleteOrders(ordersId);
         ois.deleteOrderitem(ordersId);
         return "删除订单及订单项成功";
@@ -92,16 +92,16 @@ public class OrderHandleController {
      */
     //修改支付状态
     @RequestMapping("/updatePayStatus")
-    public String updatePayStatus(int ordersId){
+    public String updatePayStatus(int ordersId) {
         int payStatus = os.updatePayStatus(ordersId);
         return "修改支付状态成功";
     }
 
     //修改发货状态、添加发货时间
     @RequestMapping("/updateSend")
-    public String updateSend(int ordersId){
+    public String updateSend(int ordersId) {
         int i = os.updateSend(ordersId);
-        if(i == 1) {
+        if (i == 1) {
             return "修改发货状态、添加发货时间成功";
         } else {
             return "修改发货状态、添加发货时间失败";
@@ -110,9 +110,9 @@ public class OrderHandleController {
 
     //修改收货状态、添加收货时间
     @RequestMapping("/updateGet")
-    public String updateGet(int ordersId){
+    public String updateGet(int ordersId) {
         int i = os.updateGet(ordersId);
-        if(i == 1) {
+        if (i == 1) {
             return "修改收货状态、添加收货时间成功";
         } else {
             return "修改发货状态、添加收货时间失败";
@@ -128,15 +128,15 @@ public class OrderHandleController {
      */
     //订单详情页面（全部状态）
     @RequestMapping("/findAllOrderItem")
-    public List<Orderitem> findAllOrderItem(){
+    public List<Orderitem> findAllOrderItem() {
         List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
         List<Integer> allOrdId = os.findAllOrdId();
         Iterator<Integer> allOrdIds = allOrdId.iterator();
-        while (allOrdIds.hasNext()){
+        while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem= ois.findAllOIByOrdId(orderId);
+            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
             Iterator<Orderitem> iterator = allOrderitem.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
         }
@@ -145,15 +145,15 @@ public class OrderHandleController {
 
     //待支付订单
     @RequestMapping("/findPayOrderItem")
-    public List<Orderitem> findPayOrderItem(){
+    public List<Orderitem> findPayOrderItem() {
         List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
         List<Integer> payOrdId = os.findPay();
         Iterator<Integer> allOrdIds = payOrdId.iterator();
-        while (allOrdIds.hasNext()){
+        while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem= ois.findAllOIByOrdId(orderId);
+            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
             Iterator<Orderitem> iterator = allOrderitem.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
         }
@@ -162,15 +162,15 @@ public class OrderHandleController {
 
     //待发货订单
     @RequestMapping("/findSendOrderItem")
-    public List<Orderitem> findSendOrderItem(){
+    public List<Orderitem> findSendOrderItem() {
         List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
         List<Integer> sendOrdId = os.findSend();
         Iterator<Integer> allOrdIds = sendOrdId.iterator();
-        while (allOrdIds.hasNext()){
+        while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem= ois.findAllOIByOrdId(orderId);
+            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
             Iterator<Orderitem> iterator = allOrderitem.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
         }
@@ -179,15 +179,15 @@ public class OrderHandleController {
 
     //待收货订单
     @RequestMapping("/findGetOrderItem")
-    public List<Orderitem> findGetOrderItem(){
+    public List<Orderitem> findGetOrderItem() {
         List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
         List<Integer> getOrdId = os.findGet();
         Iterator<Integer> allOrdIds = getOrdId.iterator();
-        while (allOrdIds.hasNext()){
+        while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem= ois.findAllOIByOrdId(orderId);
+            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
             Iterator<Orderitem> iterator = allOrderitem.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
         }
@@ -206,18 +206,18 @@ public class OrderHandleController {
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
         //String out_trade_no =
-        String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"), "UTF-8");
         //付款金额，必填
-        String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"),"UTF-8");
+        String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"), "UTF-8");
         //订单名称，必填
-        String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"),"UTF-8");
+        String subject = new String(request.getParameter("WIDsubject").getBytes("ISO-8859-1"), "UTF-8");
         //商品描述，可空
-        String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
+        String body = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"), "UTF-8");
 
-        alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
-                + "\"total_amount\":\""+ total_amount +"\","
-                + "\"subject\":\""+ subject +"\","
-                + "\"body\":\""+ body +"\","
+        alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
+                + "\"total_amount\":\"" + total_amount + "\","
+                + "\"subject\":\"" + subject + "\","
+                + "\"body\":\"" + body + "\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 
         //请求
@@ -229,9 +229,9 @@ public class OrderHandleController {
 
     @PostMapping("/notifyUrl")
     public String notifyUrl(HttpServletResponse response, HttpServletRequest request) throws AlipayApiException, UnsupportedEncodingException {
-        Map<String,String> params = new HashMap<String,String>();
-        Map<String,String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String[]> requestParams = request.getParameterMap();
+        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -251,22 +251,22 @@ public class OrderHandleController {
 	    3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
 	    4、验证app_id是否为该商户本身。
 	    */
-        if(signVerified) {//商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        if (signVerified) {//商户订单号
+            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //交易状态
-            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-            if(trade_status.equals("TRADE_FINISHED")){
+            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
+            if (trade_status.equals("TRADE_FINISHED")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
 
                 //注意：
                 //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
-            }else if (trade_status.equals("TRADE_SUCCESS")){
+            } else if (trade_status.equals("TRADE_SUCCESS")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
@@ -275,7 +275,7 @@ public class OrderHandleController {
                 //付款完成后，支付宝系统发送该交易状态通知
             }
             return "success";
-        }else {//验证失败
+        } else {//验证失败
             return "fail";
         }
     }
@@ -283,9 +283,9 @@ public class OrderHandleController {
     @GetMapping("/returnUrl")
     private String returnUrl(HttpServletRequest request)
             throws AlipayApiException, UnsupportedEncodingException {
-        Map<String,String> params = new HashMap<String,String>();
-        Map<String,String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String[]> requestParams = request.getParameterMap();
+        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
             String name = (String) iter.next();
             String[] values = (String[]) requestParams.get(name);
             String valueStr = "";
@@ -301,18 +301,18 @@ public class OrderHandleController {
         boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
 
         //——请在这里编写您的程序（以下代码仅作参考）——
-        if(signVerified) {
+        if (signVerified) {
             //商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
             //付款金额
-            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
+            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
-            return "trade_no:"+trade_no+"<br/>out_trade_no:"+out_trade_no+"<br/>total_amount:"+total_amount;
-        }else {
+            return "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount;
+        } else {
             return "验签失败";
         }
     }

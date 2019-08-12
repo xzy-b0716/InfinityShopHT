@@ -14,6 +14,7 @@ import java.util.Map;
 public class CartServiceImp implements CartService {
     @Resource
     private CartMapper cartmapper;
+
     @Override
     public List<CartItem> selectAllCartItemByOneUser(Integer userId) {
         return cartmapper.selectAllCartItemByOneUser(userId);
@@ -31,7 +32,7 @@ public class CartServiceImp implements CartService {
 
     @Override
     public void updateQuantity(Cart cart) {
-     cartmapper.updateQuantity(cart);
+        cartmapper.updateQuantity(cart);
     }
 
     @Override

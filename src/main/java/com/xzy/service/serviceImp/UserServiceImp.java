@@ -29,6 +29,7 @@ public class UserServiceImp implements UserService {
 
     /**
      * 根据用户名获取会员     √
+     *
      * @param userName
      * @return
      */
@@ -40,6 +41,7 @@ public class UserServiceImp implements UserService {
 
     /**
      * 根据userId获取会员      √
+     *
      * @param userId
      * @return
      */
@@ -52,12 +54,13 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改密码   √
+     *
      * @param userId
      * @param userPassword
      * @return
      */
     @Override
-    public Integer updatePassword(String userPassword,Integer userId){
+    public Integer updatePassword(String userPassword, Integer userId) {
         User user = new User();
         user.setUserId(userId);
         user.setUserPassword(userPassword);
@@ -67,6 +70,7 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改昵称  √
+     *
      * @param user
      * @return
      */
@@ -78,12 +82,13 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改邮箱
+     *
      * @param userId
      * @param userEmail
      * @return
      */
     @Override
-    public int updateEmail(Integer userId,String userEmail){
+    public int updateEmail(Integer userId, String userEmail) {
         User user = new User();
         user.setUserId(userId);
         user.setUserEmail(userEmail);
@@ -93,12 +98,13 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改电话号码
+     *
      * @param userId
      * @param userTel
      * @return
      */
     @Override
-    public int updateTel(Integer userId,String userTel){
+    public int updateTel(Integer userId, String userTel) {
         User user = new User();
         user.setUserId(userId);
         user.setUserTel(userTel);
@@ -108,12 +114,13 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改生日
+     *
      * @param userId
      * @param userBirth
      * @return
      */
     @Override
-    public int updateUserBirth(Integer userId, Date userBirth){
+    public int updateUserBirth(Integer userId, Date userBirth) {
         User user = new User();
         user.setUserId(userId);
         user.setUserBirth(userBirth);
@@ -123,12 +130,13 @@ public class UserServiceImp implements UserService {
 
     /**
      * 修改性别
+     *
      * @param userId
      * @param sex
      * @return
      */
     @Override
-    public int updateUserSex(Integer userId,String sex){
+    public int updateUserSex(Integer userId, String sex) {
         User user = new User();
         user.setUserId(userId);
         user.setUserSex(sex);
@@ -139,41 +147,43 @@ public class UserServiceImp implements UserService {
 
     /**
      * 上传图片  √
+     *
      * @param file
      * @param userId
      * @return
      */
     @Override
     public Map<String, Object> userPicUpload(MultipartFile file, Integer userId) {
-        Map<String,Object> map = new HashMap<>();
-        if (file==null) {
+        Map<String, Object> map = new HashMap<>();
+        if (file == null) {
             throw new InfintyException("上传的图片为空");
         }
 
         User user = userMapper.selectByPrimaryKey(userId);
-        if(user == null){
+        if (user == null) {
             throw new InfintyException("当前用户未登录或者不存在");
         }
         String fileName = file.getOriginalFilename();
         fileName = FileTool.renameToUUID(fileName);
 
         try {
-            FileTool.uploadFiles(file.getBytes(),uploadConfig.getUploadPath(),fileName);
+            FileTool.uploadFiles(file.getBytes(), uploadConfig.getUploadPath(), fileName);
         } catch (IOException e) {
-            if (fileName==null){
+            if (fileName == null) {
                 throw new InfintyException("头像名字为空");
             }
         }
 
-        Map<String,Object> returnMap = new HashMap<>();
-        String url = "/static/"+fileName;
-        updatePic(url,userId);
-        returnMap.put("imageUrl",url);
+        Map<String, Object> returnMap = new HashMap<>();
+        String url = "/static/" + fileName;
+        updatePic(url, userId);
+        returnMap.put("imageUrl", url);
         return map;
     }
 
     /**
      * 根据userId上传图片地址 √
+     *
      * @param userPic
      * @param userId
      * @return
@@ -186,7 +196,6 @@ public class UserServiceImp implements UserService {
         int update = userMapper.updatePicByUserId(user);
         return update;
     }
-
 
 
 }

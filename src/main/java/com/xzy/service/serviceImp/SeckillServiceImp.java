@@ -1,4 +1,4 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
 import com.xzy.beans.Seckill;
 import com.xzy.beans.SuccessKillPro;

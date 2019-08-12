@@ -1,4 +1,5 @@
 package com.xzy.beans;
+
 /*
  * 那么整个购物车就是由一条条的CartItem对象组成的集合*/
 public class CartItem {

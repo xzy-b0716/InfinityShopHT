@@ -37,12 +37,13 @@ public class SuccessKilledController {
         }
         return jduge;
     }
+
     @RequestMapping("insert")
-    public boolean insertSuccessKilled(Integer productId, Integer userId, Date createTime){
+    public boolean insertSuccessKilled(Integer productId, Integer userId, Date createTime) {
         boolean judgebuy = getSecProUser(productId, userId);
         //System.out.println(judgebuy);
-        if(judgebuy==false){
-            successKilledService.insertSuccessKilled(productId,userId,createTime);
+        if (judgebuy == false) {
+            successKilledService.insertSuccessKilled(productId, userId, createTime);
         }
         return judgebuy;
     }
@@ -55,8 +56,8 @@ public class SuccessKilledController {
     }
 
     @RequestMapping("querySeckill")
-    public SuccessKillPro queryByWithSeckill(Integer productId,Integer userId){
-        return successKilledService.queryByWithSeckill(productId,userId);
+    public SuccessKillPro queryByWithSeckill(Integer productId, Integer userId) {
+        return successKilledService.queryByWithSeckill(productId, userId);
     }
 }
 

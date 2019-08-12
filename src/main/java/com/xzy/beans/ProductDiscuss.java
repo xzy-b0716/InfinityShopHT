@@ -60,7 +60,6 @@ public class ProductDiscuss {
      * This method returns the value of the database column product_discuss.product_discuss_id
      *
      * @return the value of product_discuss.product_discuss_id
-     *
      * @mbggenerated
      */
     public Integer getProductDiscussId() {
@@ -72,7 +71,6 @@ public class ProductDiscuss {
      * This method sets the value of the database column product_discuss.product_discuss_id
      *
      * @param productDiscussId the value for product_discuss.product_discuss_id
-     *
      * @mbggenerated
      */
     public void setProductDiscussId(Integer productDiscussId) {
@@ -84,7 +82,6 @@ public class ProductDiscuss {
      * This method returns the value of the database column product_discuss.produc_discuss_comment
      *
      * @return the value of product_discuss.produc_discuss_comment
-     *
      * @mbggenerated
      */
     public String getProducDiscussComment() {
@@ -96,7 +93,6 @@ public class ProductDiscuss {
      * This method sets the value of the database column product_discuss.produc_discuss_comment
      *
      * @param producDiscussComment the value for product_discuss.produc_discuss_comment
-     *
      * @mbggenerated
      */
     public void setProducDiscussComment(String producDiscussComment) {
@@ -108,7 +104,6 @@ public class ProductDiscuss {
      * This method returns the value of the database column product_discuss.user_id
      *
      * @return the value of product_discuss.user_id
-     *
      * @mbggenerated
      */
     public Integer getUserId() {
@@ -120,7 +115,6 @@ public class ProductDiscuss {
      * This method sets the value of the database column product_discuss.user_id
      *
      * @param userId the value for product_discuss.user_id
-     *
      * @mbggenerated
      */
     public void setUserId(Integer userId) {
@@ -132,7 +126,6 @@ public class ProductDiscuss {
      * This method returns the value of the database column product_discuss.product_id
      *
      * @return the value of product_discuss.product_id
-     *
      * @mbggenerated
      */
     public Integer getProductId() {
@@ -144,7 +137,6 @@ public class ProductDiscuss {
      * This method sets the value of the database column product_discuss.product_id
      *
      * @param productId the value for product_discuss.product_id
-     *
      * @mbggenerated
      */
     public void setProductId(Integer productId) {
@@ -156,7 +148,6 @@ public class ProductDiscuss {
      * This method returns the value of the database column product_discuss.pd_createtime
      *
      * @return the value of product_discuss.pd_createtime
-     *
      * @mbggenerated
      */
     public String getPdCreatetime() {
@@ -168,7 +159,6 @@ public class ProductDiscuss {
      * This method sets the value of the database column product_discuss.pd_createtime
      *
      * @param pdCreatetime the value for product_discuss.pd_createtime
-     *
      * @mbggenerated
      */
     public void setPdCreatetime(String pdCreatetime) {

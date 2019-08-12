@@ -18,6 +18,6 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("file:///"+uploadConfig.getUploadPath());
+        registry.addResourceHandler("/static/**").addResourceLocations("file:///" + uploadConfig.getUploadPath());
     }
 }

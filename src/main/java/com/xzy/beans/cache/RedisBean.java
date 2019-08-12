@@ -47,7 +47,7 @@ public class RedisBean {
         return null;
     }
 
-    public String putSeckill(Seckill seckill,Integer productId) {
+    public String putSeckill(Seckill seckill, Integer productId) {
         //set Object(Seckill) -> byte[] (序列化)
         try {
             Jedis jedis = jedisPool.getResource();

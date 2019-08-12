@@ -10,14 +10,12 @@ public class SuccessKilled {
     private Integer productId;
     private Integer userId;
     private Integer seckillState;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     //多对一
     private Seckill seckill;
-
-
 
     public Integer getProductId() {
         return productId;

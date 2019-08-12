@@ -64,7 +64,7 @@ public class SeckillExecution {
     }
 
     //秒杀失败
-    public SeckillExecution(Integer productId,SeckillStateEnum stateEnum) {
+    public SeckillExecution(Integer productId, SeckillStateEnum stateEnum) {
         this.productId = productId;
         this.state = stateEnum.getState();
         this.stateInfo = stateEnum.getStateInfo();

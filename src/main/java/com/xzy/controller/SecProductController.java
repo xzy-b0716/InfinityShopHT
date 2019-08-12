@@ -15,8 +15,9 @@ public class SecProductController {
     private SecProductService secProductService;
     @Resource
     private ProductDiscussService productDiscussService;
+
     @RequestMapping("queryAll/{productId}")
-    public Seckill queryByProductId(@PathVariable("productId") Integer productId){
+    public Seckill queryByProductId(@PathVariable("productId") Integer productId) {
         Seckill seckill = secProductService.queryByProductId(productId);
         seckill.setCountDiscuss(productDiscussService.countDiscuss(productId));
         return seckill;

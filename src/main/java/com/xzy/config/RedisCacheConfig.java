@@ -54,7 +54,7 @@ public class RedisCacheConfig {
     public JedisPool initJedisPool(@Qualifier("poolConfig") JedisPoolConfig poolConfig) {
         log.info("JedisPool注入开始:");
         //  Redis无密码时候的处理
-        if ("".equals(password)){
+        if ("".equals(password)) {
             password = null;
         }
         return new JedisPool(poolConfig, host, port, timeout, password, database);

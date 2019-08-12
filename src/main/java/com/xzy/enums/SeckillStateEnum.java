@@ -2,16 +2,17 @@ package com.xzy.enums;
 
 /**
  * 使用枚举表述常量数据字段
+ *
  * @author cairunduo
  * @date 2019/8/7 - 0:00
  */
-public enum  SeckillStateEnum {
-    SUCCESS(1,"秒杀成功"),
-    END(0,"秒杀结束"),
-    REPEAT_KILL(-1,"重复秒杀"),
-    INNER_ERROR(-2,"系统异常"),
-    DATA_REWRITE(-3,"数据篡改"),
-    STOP_SECKILL(-4,"不在秒杀时间范围内");
+public enum SeckillStateEnum {
+    SUCCESS(1, "秒杀成功"),
+    END(0, "秒杀结束"),
+    REPEAT_KILL(-1, "重复秒杀"),
+    INNER_ERROR(-2, "系统异常"),
+    DATA_REWRITE(-3, "数据篡改"),
+    STOP_SECKILL(-4, "不在秒杀时间范围内");
     //PRE_BEGIN(-5,"秒杀未开启");
 
 
@@ -31,8 +32,8 @@ public enum  SeckillStateEnum {
         this.stateInfo = stateInfo;
     }
 
-    public static  SeckillStateEnum stateOf(int index){
-        for(SeckillStateEnum state : values()){
+    public static SeckillStateEnum stateOf(int index) {
+        for (SeckillStateEnum state : values()) {
             return state;
         }
         return null;

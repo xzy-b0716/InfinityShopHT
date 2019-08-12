@@ -43,7 +43,7 @@ public class OrdersServiceImp implements OrdersService {
             bd += oiTotalPrice;
         }*/
         Product product = om.findProByOid(productId);
-        order.setOrdersTotalPrice(product.getProductPrice()*num);
+        order.setOrdersTotalPrice(product.getProductPrice() * num);
 
         int insert = om.insertSelective(order);
         //主键回填
@@ -54,7 +54,7 @@ public class OrdersServiceImp implements OrdersService {
 
     //通过购物车增加(生成)订单
     @Override
-    public int addOrderBy02(int userId, int addressId, float ordersTotalPrice){
+    public int addOrderBy02(int userId, int addressId, float ordersTotalPrice) {
         Orders order = new Orders();
 
         order.setOrdersTotalPrice(ordersTotalPrice);
@@ -74,7 +74,7 @@ public class OrdersServiceImp implements OrdersService {
 
     //通过秒杀增加(生成)订单
     @Override
-    public int addOrderBy03(int userId, int addressId, int productId){
+    public int addOrderBy03(int userId, int addressId, int productId) {
         Orders order = new Orders();
 
         //
@@ -95,23 +95,23 @@ public class OrdersServiceImp implements OrdersService {
 
     //删除订单
     @Override
-    public int deleteOrders(int OrdersId){
+    public int deleteOrders(int OrdersId) {
         int i = om.deleteByPrimaryKey(OrdersId);
         return i;
     }
 
     //修改支付状态
     @Override
-    public int updatePayStatus(int ordersId){
+    public int updatePayStatus(int ordersId) {
         int payStatus = om.updatePayStatus(ordersId);
         return payStatus;
     }
 
     //修改发货状态、添加发货时间
     @Override
-    public int updateSend(int ordersId){
+    public int updateSend(int ordersId) {
         int payStutas = om.findPayStutas(ordersId);
-        if(payStutas == 1){
+        if (payStutas == 1) {
             om.updateSendStatus(ordersId);
             om.updateSendTime(new Date(), ordersId);
             return 1;
@@ -122,9 +122,9 @@ public class OrdersServiceImp implements OrdersService {
 
     //修改收货状态、添加收货时间
     @Override
-    public int updateGet(int ordersId){
+    public int updateGet(int ordersId) {
         int sendStutas = om.findSendStutas(ordersId);
-        if(sendStutas == 1) {
+        if (sendStutas == 1) {
             om.updateGetStatus(ordersId);
             om.updateGetTime(new Date(), ordersId);
             return 1;
@@ -135,28 +135,28 @@ public class OrdersServiceImp implements OrdersService {
 
     //查询所有订单的ordersId
     @Override
-    public List<Integer> findAllOrdId(){
+    public List<Integer> findAllOrdId() {
         List<Integer> allOrdId = om.findAllOrdId();
         return allOrdId;
     }
 
     //查询待支付订单
     @Override
-    public List<Integer> findPay(){
+    public List<Integer> findPay() {
         List<Integer> ordPay = om.findPay();
         return ordPay;
     }
 
     //查询待发货订单
     @Override
-    public List<Integer> findSend(){
+    public List<Integer> findSend() {
         List<Integer> ordSend = om.findSend();
         return ordSend;
     }
 
     //查询待收货订单
     @Override
-    public List<Integer> findGet(){
+    public List<Integer> findGet() {
         List<Integer> ordGet = om.findGet();
         return ordGet;
     }

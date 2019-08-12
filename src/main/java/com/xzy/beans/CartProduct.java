@@ -58,7 +58,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.cart_product_id
      *
      * @return the value of cart_product.cart_product_id
-     *
      * @mbggenerated
      */
     public Integer getCartProductId() {
@@ -70,7 +69,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.cart_product_id
      *
      * @param cartProductId the value for cart_product.cart_product_id
-     *
      * @mbggenerated
      */
     public void setCartProductId(Integer cartProductId) {
@@ -82,7 +80,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.quantity
      *
      * @return the value of cart_product.quantity
-     *
      * @mbggenerated
      */
     public Integer getQuantity() {
@@ -94,7 +91,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.quantity
      *
      * @param quantity the value for cart_product.quantity
-     *
      * @mbggenerated
      */
     public void setQuantity(Integer quantity) {
@@ -106,7 +102,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.checked
      *
      * @return the value of cart_product.checked
-     *
      * @mbggenerated
      */
     public Integer getChecked() {
@@ -118,7 +113,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.checked
      *
      * @param checked the value for cart_product.checked
-     *
      * @mbggenerated
      */
     public void setChecked(Integer checked) {
@@ -130,7 +124,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.product_id
      *
      * @return the value of cart_product.product_id
-     *
      * @mbggenerated
      */
     public Integer getProductId() {
@@ -142,7 +135,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.product_id
      *
      * @param productId the value for cart_product.product_id
-     *
      * @mbggenerated
      */
     public void setProductId(Integer productId) {
@@ -154,7 +146,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.cart_id
      *
      * @return the value of cart_product.cart_id
-     *
      * @mbggenerated
      */
     public Integer getCartId() {
@@ -166,7 +157,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.cart_id
      *
      * @param cartId the value for cart_product.cart_id
-     *
      * @mbggenerated
      */
     public void setCartId(Integer cartId) {
@@ -178,7 +168,6 @@ public class CartProduct {
      * This method returns the value of the database column cart_product.is_alive
      *
      * @return the value of cart_product.is_alive
-     *
      * @mbggenerated
      */
     public Integer getIsAlive() {
@@ -190,7 +179,6 @@ public class CartProduct {
      * This method sets the value of the database column cart_product.is_alive
      *
      * @param isAlive the value for cart_product.is_alive
-     *
      * @mbggenerated
      */
     public void setIsAlive(Integer isAlive) {

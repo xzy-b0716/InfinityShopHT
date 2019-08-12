@@ -16,10 +16,11 @@ import java.util.List;
  * @date 2019/8/1 - 16:19
  */
 @Service
-public class AddressServiceImpl implements AddressService {
+public class AddressServiceImp implements AddressService {
 
     @Autowired
     private AddressMapper tbAddressMapper;
+
     /**
      * 获取一个用户所有地址列表的实现方法
      *
@@ -62,7 +63,7 @@ public class AddressServiceImpl implements AddressService {
         //设置唯一默认
         setOneDefault(address);
         int rowCount = tbAddressMapper.insert(address);
-        if(rowCount == 0){
+        if (rowCount == 0) {
             throw new InfintyException("添加地址失败");
         }
         return 1;
@@ -94,12 +95,13 @@ public class AddressServiceImpl implements AddressService {
     private void setOneDefault(Address address) {
         if (address.getAddressDefalut()) {
             List<Address> list = getUserAllAddress(address.getUserId());
-            for (Address address1:list){
+            for (Address address1 : list) {
                 address1.setAddressDefalut(false);
                 tbAddressMapper.updateByPrimaryKey(address1);
             }
         }
     }
+
     /**
      * 删除地址信息
      *

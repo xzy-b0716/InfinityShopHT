@@ -15,6 +15,7 @@ public interface SeckillService {
 
     /**
      * 减少库存
+     *
      * @param productId
      * @param killTime
      * @return
@@ -24,6 +25,7 @@ public interface SeckillService {
 
     /**
      * 展示商品列表
+     *
      * @return
      */
     public List<Seckill> querySecProList();
@@ -42,7 +44,7 @@ public interface SeckillService {
      * @param productId
      * @param userId
      */
-    SeckillExecution executeSeckill(Integer productId, Integer userId,String md5)
+    SeckillExecution executeSeckill(Integer productId, Integer userId, String md5)
             throws SeckillException, RepeatKillException, SeckillCloseException;
 
 }

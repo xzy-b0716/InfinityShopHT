@@ -39,6 +39,7 @@ public interface AddressMapper {
 
     /**
      * 查询用户userId所有
+     *
      * @return
      */
     List<Address> selectUserAllAddress(Integer userId);

@@ -8,8 +8,12 @@ import java.util.Map;
 
 public interface CartService {
     public List<CartItem> selectAllCartItemByOneUser(Integer userId);
-    public void deleteCartItem (Map map);
-    public void insertCartItem(Cart cart) ;
+
+    public void deleteCartItem(Map map);
+
+    public void insertCartItem(Cart cart);
+
     public void updateQuantity(Cart cart);
+
     public List<Cart> selectCart(Integer userId);
 }

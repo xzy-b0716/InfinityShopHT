@@ -11,6 +11,7 @@ public class Orderitem {
     public void setOrders(Orders orders) {
         this.orders = orders;
     }
+
     private Integer orderitemId;
     private Integer oiProductNum;
     private Float oiTotalPrice;

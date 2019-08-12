@@ -80,6 +80,81 @@ public class Product {
 
     private String productDescribe;
 
+    private ProductClass productclass;
+
+    private Browse browse;
+
+    public Browse getBrowse() {
+        return browse;
+    }
+
+    public void setBrowse(Browse browse) {
+        this.browse = browse;
+    }
+
+    private List<Product> list1;
+
+    public List<Product> getList1() {
+        return list1;
+    }
+
+
+    public void setList1(List<Product> list1) {
+        this.list1 = list1;
+    }
+
+    private List<ProductClass> list;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productPicture='" + productPicture + '\'' +
+                ", productStock=" + productStock +
+                ", productclass=" + productclass +
+                ", browse=" + browse +
+                ", list1=" + list1 +
+                ", list=" + list +
+                ", productComNum=" + productComNum +
+                ", productPrice=" + productPrice +
+                ", productDescribe='" + productDescribe + '\'' +
+                ", productSizePic='" + productSizePic + '\'' +
+                ", productSuperclass='" + productSuperclass + '\'' +
+                ", productClassId='" + productClassId + '\'' +
+                ", productCreatetime=" + productCreatetime +
+                ", productBrand='" + productBrand + '\'' +
+                ", productMaterial='" + productMaterial + '\'' +
+                ", productVersion='" + productVersion + '\'' +
+                ", productStyle='" + productStyle + '\'' +
+                ", productThickness='" + productThickness + '\'' +
+                ", productSize='" + productSize + '\'' +
+                ", productColor='" + productColor + '\'' +
+                '}';
+    }
+
+    public List<ProductClass> getList() {
+
+        return list;
+    }
+
+    public void setList(List<ProductClass> list) {
+        this.list = list;
+    }
+
+    private String productSizePic;
+
+
+    public ProductClass getProductclass() {
+
+        return productclass;
+    }
+
+    public void setProductclass(ProductClass productclass) {
+
+        this.productclass = productclass;
+    }
+
     private String productSuperclass;
 
     private String productClassId;
@@ -90,8 +165,8 @@ public class Product {
      *
      * @mbggenerated
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 
     private Date productCreatetime;
 
@@ -110,7 +185,6 @@ public class Product {
      * This method returns the value of the database column product.product_id
      *
      * @return the value of product.product_id
-     *
      * @mbggenerated
      */
     public Integer getProductId() {
@@ -122,7 +196,6 @@ public class Product {
      * This method sets the value of the database column product.product_id
      *
      * @param productId the value for product.product_id
-     *
      * @mbggenerated
      */
     public void setProductId(Integer productId) {
@@ -134,7 +207,6 @@ public class Product {
      * This method returns the value of the database column product.product_name
      *
      * @return the value of product.product_name
-     *
      * @mbggenerated
      */
     public String getProductName() {
@@ -146,7 +218,6 @@ public class Product {
      * This method sets the value of the database column product.product_name
      *
      * @param productName the value for product.product_name
-     *
      * @mbggenerated
      */
     public void setProductName(String productName) {
@@ -158,7 +229,6 @@ public class Product {
      * This method returns the value of the database column product.product_picture
      *
      * @return the value of product.product_picture
-     *
      * @mbggenerated
      */
     public String getProductPicture() {
@@ -170,7 +240,6 @@ public class Product {
      * This method sets the value of the database column product.product_picture
      *
      * @param productPicture the value for product.product_picture
-     *
      * @mbggenerated
      */
     public void setProductPicture(String productPicture) {
@@ -182,7 +251,6 @@ public class Product {
      * This method returns the value of the database column product.product_stock
      *
      * @return the value of product.product_stock
-     *
      * @mbggenerated
      */
     public Integer getProductStock() {
@@ -194,7 +262,6 @@ public class Product {
      * This method sets the value of the database column product.product_stock
      *
      * @param productStock the value for product.product_stock
-     *
      * @mbggenerated
      */
     public void setProductStock(Integer productStock) {
@@ -206,7 +273,6 @@ public class Product {
      * This method returns the value of the database column product.product_com_num
      *
      * @return the value of product.product_com_num
-     *
      * @mbggenerated
      */
     public Integer getProductComNum() {
@@ -218,7 +284,6 @@ public class Product {
      * This method sets the value of the database column product.product_com_num
      *
      * @param productComNum the value for product.product_com_num
-     *
      * @mbggenerated
      */
     public void setProductComNum(Integer productComNum) {
@@ -230,7 +295,6 @@ public class Product {
      * This method returns the value of the database column product.product_price
      *
      * @return the value of product.product_price
-     *
      * @mbggenerated
      */
     public Float getProductPrice() {
@@ -242,7 +306,6 @@ public class Product {
      * This method sets the value of the database column product.product_price
      *
      * @param productPrice the value for product.product_price
-     *
      * @mbggenerated
      */
     public void setProductPrice(Float productPrice) {
@@ -254,7 +317,6 @@ public class Product {
      * This method returns the value of the database column product.product_describe
      *
      * @return the value of product.product_describe
-     *
      * @mbggenerated
      */
     public String getProductDescribe() {
@@ -266,7 +328,6 @@ public class Product {
      * This method sets the value of the database column product.product_describe
      *
      * @param productDescribe the value for product.product_describe
-     *
      * @mbggenerated
      */
     public void setProductDescribe(String productDescribe) {
@@ -279,7 +340,6 @@ public class Product {
      * This method returns the value of the database column product.product_superclass
      *
      * @return the value of product.product_superclass
-     *
      * @mbggenerated
      */
     public String getProductSuperclass() {
@@ -291,7 +351,6 @@ public class Product {
      * This method sets the value of the database column product.product_superclass
      *
      * @param productSuperclass the value for product.product_superclass
-     *
      * @mbggenerated
      */
     public void setProductSuperclass(String productSuperclass) {
@@ -303,7 +362,6 @@ public class Product {
      * This method returns the value of the database column product.product_class_id
      *
      * @return the value of product.product_class_id
-     *
      * @mbggenerated
      */
     public String getProductClassId() {
@@ -315,7 +373,6 @@ public class Product {
      * This method sets the value of the database column product.product_class_id
      *
      * @param productClassId the value for product.product_class_id
-     *
      * @mbggenerated
      */
     public void setProductClassId(String productClassId) {
@@ -327,7 +384,6 @@ public class Product {
      * This method returns the value of the database column product.product_createtime
      *
      * @return the value of product.product_createtime
-     *
      * @mbggenerated
      */
     public Date getProductCreatetime() {
@@ -339,7 +395,6 @@ public class Product {
      * This method sets the value of the database column product.product_createtime
      *
      * @param productCreatetime the value for product.product_createtime
-     *
      * @mbggenerated
      */
     public void setProductCreatetime(Date productCreatetime) {
@@ -351,7 +406,6 @@ public class Product {
      * This method returns the value of the database column product.product_brand
      *
      * @return the value of product.product_brand
-     *
      * @mbggenerated
      */
     public String getProductBrand() {
@@ -363,7 +417,6 @@ public class Product {
      * This method sets the value of the database column product.product_brand
      *
      * @param productBrand the value for product.product_brand
-     *
      * @mbggenerated
      */
     public void setProductBrand(String productBrand) {
@@ -375,7 +428,6 @@ public class Product {
      * This method returns the value of the database column product.product_material
      *
      * @return the value of product.product_material
-     *
      * @mbggenerated
      */
     public String getProductMaterial() {
@@ -387,7 +439,6 @@ public class Product {
      * This method sets the value of the database column product.product_material
      *
      * @param productMaterial the value for product.product_material
-     *
      * @mbggenerated
      */
     public void setProductMaterial(String productMaterial) {
@@ -399,7 +450,6 @@ public class Product {
      * This method returns the value of the database column product.product_version
      *
      * @return the value of product.product_version
-     *
      * @mbggenerated
      */
     public String getProductVersion() {
@@ -411,7 +461,6 @@ public class Product {
      * This method sets the value of the database column product.product_version
      *
      * @param productVersion the value for product.product_version
-     *
      * @mbggenerated
      */
     public void setProductVersion(String productVersion) {
@@ -423,7 +472,6 @@ public class Product {
      * This method returns the value of the database column product.product_style
      *
      * @return the value of product.product_style
-     *
      * @mbggenerated
      */
     public String getProductStyle() {
@@ -435,7 +483,6 @@ public class Product {
      * This method sets the value of the database column product.product_style
      *
      * @param productStyle the value for product.product_style
-     *
      * @mbggenerated
      */
     public void setProductStyle(String productStyle) {
@@ -447,7 +494,6 @@ public class Product {
      * This method returns the value of the database column product.product_thickness
      *
      * @return the value of product.product_thickness
-     *
      * @mbggenerated
      */
     public String getProductThickness() {
@@ -459,7 +505,6 @@ public class Product {
      * This method sets the value of the database column product.product_thickness
      *
      * @param productThickness the value for product.product_thickness
-     *
      * @mbggenerated
      */
     public void setProductThickness(String productThickness) {

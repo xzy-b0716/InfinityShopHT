@@ -16,11 +16,11 @@ import javax.servlet.http.HttpSession;
 public class ProductDiscussController {
     @Autowired
     private ProductDiscussService productDiscussService;
+
     //查询评论条数
     @RequestMapping("/countController/{productId}")
-    public Integer countController(@PathVariable("productId") Integer productId)
-    {
-        Integer count= productDiscussService.countDiscuss(productId);
+    public Integer countController(@PathVariable("productId") Integer productId) {
+        Integer count = productDiscussService.countDiscuss(productId);
         return count;
     }
 

@@ -10,7 +10,7 @@ public class ProductColor {
 
     private String color;
 
-    private boolean show =false;
+    private boolean show = false;
 
     public Integer getProduct_color_id() {
         return product_color_id;

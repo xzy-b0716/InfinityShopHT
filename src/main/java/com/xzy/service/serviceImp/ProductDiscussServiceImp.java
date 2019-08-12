@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 public class ProductDiscussServiceImp implements ProductDiscussService {
     @Resource
     private ProductDiscussMapper productDiscussMapper;
+
     @Override
     public int countDiscuss(Integer productId) {
         return productDiscussMapper.countDiscuss(productId);

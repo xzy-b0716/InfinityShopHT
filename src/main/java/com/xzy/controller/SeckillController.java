@@ -57,7 +57,7 @@ public class SeckillController {
 
 
     @RequestMapping("executeSeckill/{productId}/{userId}")
-    public SeckillResult<SeckillExecution> testSeckillLogic(@PathVariable("productId") Integer productId,@PathVariable("userId") Integer userId){
+    public SeckillResult<SeckillExecution> testSeckillLogic(@PathVariable("productId") Integer productId, @PathVariable("userId") Integer userId) {
         Exposer exposer = seckillService.exportSeckillUrl(productId);
         if (exposer.isExposed()) {
             String md5 = exposer.getMd5();

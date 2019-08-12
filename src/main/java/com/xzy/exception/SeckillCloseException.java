@@ -2,6 +2,7 @@ package com.xzy.exception;
 
 /**
  * 秒杀关闭异常
+ *
  * @author cairunduo
  * @date 2019/8/5 - 21:51
  */

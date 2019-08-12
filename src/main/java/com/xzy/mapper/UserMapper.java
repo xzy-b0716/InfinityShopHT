@@ -5,10 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
-
     User getUserById(Integer userId);
-
-
 
     int deleteByPrimaryKey(Integer userId);
 
@@ -28,10 +25,11 @@ public interface UserMapper {
 
     int checkUserName(String userName);
 
-    User selectLogin(@Param("userName") String userName, @Param("userPassword")String userPassword);
+    User selectLogin(@Param("userName") String userName, @Param("userPassword") String userPassword);
 
     /**
      * 根据userId更新头像
+     *
      * @param user
      * @returne
      */
@@ -39,6 +37,7 @@ public interface UserMapper {
 
     /**
      * 根据userId修改昵称
+     *
      * @param user
      * @return
      */
@@ -46,6 +45,7 @@ public interface UserMapper {
 
     /**
      * 修改密码
+     *
      * @param user
      * @return
      */

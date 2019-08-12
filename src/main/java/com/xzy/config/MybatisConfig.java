@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 public class MybatisConfig {
 
     @Bean
-    public ConfigurationCustomizer configurationCustomizer(){
+    public ConfigurationCustomizer configurationCustomizer() {
         return new ConfigurationCustomizer() {
 
             @Override

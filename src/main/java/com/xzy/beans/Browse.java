@@ -40,7 +40,6 @@ public class Browse {
      * This method returns the value of the database column browse.browse_id
      *
      * @return the value of browse.browse_id
-     *
      * @mbggenerated
      */
     public Integer getBrowseId() {
@@ -52,7 +51,6 @@ public class Browse {
      * This method sets the value of the database column browse.browse_id
      *
      * @param browseId the value for browse.browse_id
-     *
      * @mbggenerated
      */
     public void setBrowseId(Integer browseId) {
@@ -64,7 +62,6 @@ public class Browse {
      * This method returns the value of the database column browse.product_id
      *
      * @return the value of browse.product_id
-     *
      * @mbggenerated
      */
     public Integer getProductId() {
@@ -76,7 +73,6 @@ public class Browse {
      * This method sets the value of the database column browse.product_id
      *
      * @param productId the value for browse.product_id
-     *
      * @mbggenerated
      */
     public void setProductId(Integer productId) {
@@ -88,7 +84,6 @@ public class Browse {
      * This method returns the value of the database column browse.user_id
      *
      * @return the value of browse.user_id
-     *
      * @mbggenerated
      */
     public Integer getUserId() {
@@ -100,7 +95,6 @@ public class Browse {
      * This method sets the value of the database column browse.user_id
      *
      * @param userId the value for browse.user_id
-     *
      * @mbggenerated
      */
     public void setUserId(Integer userId) {
@@ -112,7 +106,6 @@ public class Browse {
      * This method returns the value of the database column browse.browse_time
      *
      * @return the value of browse.browse_time
-     *
      * @mbggenerated
      */
     public Date getBrowseTime() {
@@ -124,7 +117,6 @@ public class Browse {
      * This method sets the value of the database column browse.browse_time
      *
      * @param browseTime the value for browse.browse_time
-     *
      * @mbggenerated
      */
     public void setBrowseTime(Date browseTime) {

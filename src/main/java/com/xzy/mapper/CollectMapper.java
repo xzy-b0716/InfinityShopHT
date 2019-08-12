@@ -10,6 +10,7 @@ public interface CollectMapper {
      * @mbggenerated
      */
     Integer isLike(Integer productId, Integer userId);
+
     int deleteByPrimaryKey(Integer collectId);
 
     /**
