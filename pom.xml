@@ -49,7 +49,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -82,16 +81,12 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>3.7.110.ALL</version>
         </dependency>
-=======
         <!--文件上传-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
-
->>>>>>> 424587eec3030d22f66e23225a78e988f6ce0bd3
     </dependencies>
 
     <build>
