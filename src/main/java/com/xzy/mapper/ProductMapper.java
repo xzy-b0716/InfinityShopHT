@@ -1,5 +1,6 @@
 package com.xzy.mapper;
 
+import com.xzy.beans.Information;
 import com.xzy.beans.Product;
 
 public interface ProductMapper {
@@ -9,6 +10,7 @@ public interface ProductMapper {
      *
      * @mbggenerated
      */
+
     int deleteByPrimaryKey(Integer productId);
 
     /**

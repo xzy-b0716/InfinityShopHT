@@ -1,4 +1,4 @@
-package com.xzy.service.serviceImpl;
+package com.xzy.service.serviceImp;
 
 import com.xzy.mapper.CollectMapper;
 import com.xzy.service.CollectService;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * Create by Shuai on 2019/8/10 14:01
  */
 @Service
-public class CollectServiceImpl implements CollectService {
+public class CollectServiceImp implements CollectService {
     @Autowired
     private CollectMapper collectMapper;
     @Override

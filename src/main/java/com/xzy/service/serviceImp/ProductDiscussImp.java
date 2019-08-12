@@ -1,4 +1,4 @@
-package com.xzy.service.serviceImpl;
+package com.xzy.service.serviceImp;
 
 import com.xzy.beans.ProductDiscuss;
 import com.xzy.mapper.ProductDiscussMapper;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Create by Shuai on 2019/8/3 16:31
  */
 @Service
-public class ProductDiscussImpl implements ProductDiscussService {
+public class ProductDiscussImp implements ProductDiscussService {
     @Autowired
     private ProductDiscussMapper productDiscussMapper;
     @Override
