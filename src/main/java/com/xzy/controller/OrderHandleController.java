@@ -9,7 +9,6 @@ import com.xzy.beans.Orderitem;
 import com.xzy.config.AlipayConfig;
 import com.xzy.service.serviceImp.OrderItemServiceImp;
 import com.xzy.service.serviceImp.OrdersServiceImp;
-import com.xzy.service.serviceImp.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

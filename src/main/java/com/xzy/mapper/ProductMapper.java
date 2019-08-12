@@ -1,8 +1,5 @@
 package com.xzy.mapper;
 
-
-
-
 import com.xzy.beans.Product;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +9,7 @@ import java.util.List;
 public interface ProductMapper {
 
     int deleteByPrimaryKey(Integer productId);
+
 
     int insert(Product record);
 
@@ -26,20 +24,28 @@ public interface ProductMapper {
 
 
     //通过商品点赞数查询商品列表(通过商品点赞数降序排序)
+
     List<Product> getHotSearchProduct();
 
-    List<Product> recommendNewest();
-
     List<Product> getClasss(String sex);
-
-    List<Product> selectProductByProductClassId(String id);
-
-    List<Product> selectClassProductByProductId(Integer id);
 
     List<Product> selectHistoryByUserId(Integer id);
 
     List<Product> selectCollectByUserId(Integer id);
 
+    List<Product> orderbyproduct_com_num(Integer  id);
+
+    List<Product> orderbyproduct_price(Integer  id);
+
+    List<Product> orderbyproduct_createtime(Integer  id);
+
+    List<Product> selectClassProductByProductId(Integer id);
+
+    List<Product> recommendNewest();
+
+    List<Product>  getClasss(Integer sex);
+
+    List<Product> selectProductByProductClassId(String id);
 
     int updateByPrimaryKey(Product record);
 

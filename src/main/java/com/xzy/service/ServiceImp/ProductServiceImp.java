@@ -1,12 +1,10 @@
-package com.xzy.service.ServiceImp;
+package com.xzy.service.serviceImp;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.xzy.beans.Product;
 import com.xzy.mapper.ProductMapper;
 import com.xzy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -29,60 +27,47 @@ public class ProductServiceImp implements ProductService {
     @Override
     public List<Product> getClasss(String sex) {
         List<Product> products = productMapper.getClasss(sex);
-
-        System.out.println("server"+products);
         return products;
-
     }
     @Override
-    public  List<Product> selectProductByProductClassId(String  id){
+    public List<Product> orderbyproduct_com_num(Integer id) {
+        List<Product> products = productMapper.orderbyproduct_com_num(id);
+        return products;
+    }
+    @Override
+    public List<Product> orderbyproduct_price(Integer id) {
+        List<Product> products = productMapper.orderbyproduct_price(id);
+        return products;
+    }
+    @Override
+    public List<Product> orderbyproduct_createtime(Integer id) {
+        List<Product> products = productMapper.orderbyproduct_createtime(id);
+
+        return products;
+    }
+
+    @Override
+    public List<Product> selectProductByProductClassId(String id) {
         List<Product> products = productMapper.selectProductByProductClassId(id);
         return products;
 
     }
+
     @Override
-    public  List<Product> selectClassProductByProductId(Integer  id){
-        List<Product> products = productMapper.selectClassProductByProductId( id);
+    public List<Product> selectClassProductByProductId(Integer id) {
+        List<Product> products = productMapper.selectClassProductByProductId(id);
         return products;
     }
 
     @Override
-    public List<Product> selectHistoryByUserId(Integer  id){
+    public List<Product> selectHistoryByUserId(Integer id) {
         List<Product> products = productMapper.selectHistoryByUserId(id);
         return products;
     }
 
     @Override
-    public List<Product>  selectCollectByUserId(Integer  id){
-        List<Product> products = productMapper. selectCollectByUserId( id);
-        return  products;
+    public List<Product> selectCollectByUserId(Integer id) {
+        List<Product> products = productMapper.selectCollectByUserId(id);
+        return products;
     }
-
-
-//    /*根据用户id查询商品浏览记录表*/
-//    @Override
-//    public List<Browse> selectHistorysByUserId(Integer id){
-//        List<Browse> userHistories=productMapper.selectHistorysByUserId(id);
-//        return userHistories;
-//    }
-//    /*根据用户id和商品id查询浏览记录*/
-//    @Override
-//    public Browse getHistoryByUserIdAndProductId(com.xzy.beans.Browse browse){
-//        return productMapper.selectHistoryByUserIdAndProductId(browse);
-//    }
-//    /*更新商品浏览历史表*/
-//    @Override
-//    public void updateHistory(UserHistory userHistory){
-//        productmapper.updateHistory(userHistory);
-//    }
-//    /*插入商品到浏览历史表*/
-//    @Override
-//    public void insertProductHistory(UserHistory userHistory){
-//        productmapper.insertHistory(userHistory);
-//    }
-//
-//    @Override
-//    public void delete(Integer productId) {
-//        productmapper.deleteHistory(productId);
-//    }
 }

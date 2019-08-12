@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-/**
- * @
- */
 @Controller
 public class ProductController {
     //获得热门商品
@@ -74,6 +71,29 @@ public class ProductController {
 
         return productsList;
     }
+
+    @RequestMapping("/orderbyproduct_com_num/{id}")
+    @ResponseBody
+    public List<Product> orderbyproduct_com_num(@PathVariable("id") Integer id) {
+        List<Product> productsList = productService.orderbyproduct_com_num(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+
+    @RequestMapping("/orderbyproduct_price/{id}")
+    @ResponseBody
+    public List<Product> orderbyproduct_price(@PathVariable("id") Integer id) {
+        List<Product> productsList = productService.orderbyproduct_price(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+
+    @RequestMapping("/orderbyproduct_createtime/{id}")
+    @ResponseBody
+    public List<Product> orderbyproduct_createtime(@PathVariable("id") Integer id) {
+        List<Product> productsList = productService.orderbyproduct_createtime(id);
+        System.out.println(productsList);
+        return productsList;
+    }
+
 }
-
-
