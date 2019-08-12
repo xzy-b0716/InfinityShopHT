@@ -30,12 +30,6 @@ public class SeckillController {
     @Resource
     private SeckillService seckillService;
 
-    @RequestMapping("reduce")
-    public int reduceNumber(Integer productId, Date killTime) throws ParseException {
-        System.out.println(killTime);
-        return seckillService.reduceNumber(productId, killTime);
-    }
-
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request) {
         //转换日期 注意这里的转化要和传进来的字符串的格式一直 如2019-8-6 就应该为yyyy-MM-dd
@@ -61,28 +55,12 @@ public class SeckillController {
         return result;
     }
 
-    @RequestMapping("execute")
-    public SeckillExecution executeSeckill(Integer productId, Integer userId, String md5) {
-        return seckillService.executeSeckill(productId, userId, md5);
-    }
 
-    @RequestMapping("executeSeckill")
-    public void testSeckillLogic(Integer productId, Integer userId) throws Exception {
+    @RequestMapping("executeSeckill/{productId}/{userId}")
+    public SeckillResult<SeckillExecution> testSeckillLogic(@PathVariable("productId") Integer productId,@PathVariable("userId") Integer userId){
         Exposer exposer = seckillService.exportSeckillUrl(productId);
         if (exposer.isExposed()) {
             String md5 = exposer.getMd5();
-            SeckillExecution execution = seckillService.executeSeckill(productId, userId, md5);
-        } else {
-            System.out.println("秒杀未开始");
-        }
-
-    }
-
-    @RequestMapping(value = "/execution/{productId}/{userId}/{md5}", produces="application/json;charset=UTF-8")
-    public SeckillResult<SeckillExecution> execute(@PathVariable("productId") Integer productId,
-                                                   @PathVariable("userId") Integer userId,
-                                                   @PathVariable("md5") String md5) {
-        SeckillResult<SeckillExecution> result;
             try {
                 SeckillExecution execution = seckillService.executeSeckill(productId, userId, md5);
                 return new SeckillResult<SeckillExecution>(true, execution);
@@ -96,5 +74,10 @@ public class SeckillController {
                 SeckillExecution execution = new SeckillExecution(productId, SeckillStateEnum.INNER_ERROR);
                 return new SeckillResult<SeckillExecution>(false, execution);
             }
+        } else {
+            SeckillExecution execution = new SeckillExecution(productId, SeckillStateEnum.STOP_SECKILL);
+            return new SeckillResult<SeckillExecution>(false, execution);
         }
     }
+
+}

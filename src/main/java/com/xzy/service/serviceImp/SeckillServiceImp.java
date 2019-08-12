@@ -1,7 +1,8 @@
-package com.xzy.service.serviceImp;
+package com.xzy.service.ServiceImp;
 
 import com.xzy.beans.Seckill;
 import com.xzy.beans.SuccessKillPro;
+import com.xzy.beans.SuccessKilled;
 import com.xzy.beans.cache.RedisBean;
 import com.xzy.controller.SuccessKilledController;
 import com.xzy.dto.Exposer;
@@ -19,8 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +33,9 @@ import java.util.List;
 public class SeckillServiceImp implements SeckillService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Resource(name = "initJedisPool")
+    private JedisPool jedisPool;
 
     @Resource
     private RedisBean redisBean;
@@ -63,6 +71,7 @@ public class SeckillServiceImp implements SeckillService {
         //优化点：缓存优化：超时的基础上维护一致性
         //1.访问Redis
         Seckill seckill = redisBean.getSeckill(productId);
+        Jedis jedis = jedisPool.getResource();
         if (seckill == null) {
             //2.访问数据库
             seckill = secProductMapper.queryByProductId(productId);
@@ -79,6 +88,11 @@ public class SeckillServiceImp implements SeckillService {
                 //3.放入redis
                 redisBean.putSeckill(seckill, productId);
             }
+        }
+        if (new Date().getTime() > seckill.getSeckillEndTime().getTime()) {
+            String key = "seckill:" + productId;
+            jedis.del(key);
+            return new Exposer(false, productId, new Date().getTime(), seckill.getSeckillStartTime().getTime(), seckill.getSeckillEndTime().getTime());
         }
         //转化特定字符串过程，不可逆
         //System.out.println(seckill.getSeckillStartTime());
@@ -133,4 +147,3 @@ public class SeckillServiceImp implements SeckillService {
         }
     }
 }
-

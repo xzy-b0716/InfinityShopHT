@@ -10,8 +10,10 @@ public enum  SeckillStateEnum {
     END(0,"秒杀结束"),
     REPEAT_KILL(-1,"重复秒杀"),
     INNER_ERROR(-2,"系统异常"),
-    DATA_REWRITE(-3,"数据篡改");
-    //PRE_BEGIN(-4,"秒杀未开启");
+    DATA_REWRITE(-3,"数据篡改"),
+    STOP_SECKILL(-4,"不在秒杀时间范围内");
+    //PRE_BEGIN(-5,"秒杀未开启");
+
 
     private int state;
     private String stateInfo;
