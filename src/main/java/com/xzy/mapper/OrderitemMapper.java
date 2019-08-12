@@ -2,6 +2,7 @@ package com.xzy.mapper;
 
 import com.xzy.beans.Cart;
 import com.xzy.beans.Orderitem;
+import com.xzy.beans.OrderitemProduct;
 import com.xzy.beans.Product;
 import com.xzy.beans.Seckill;
 import org.apache.ibatis.annotations.Param;
@@ -72,4 +73,6 @@ public interface OrderitemMapper {
     Seckill findSecByPId(int productId);
 
     int updateSecStock(@Param("seckillStock") int seckillStock, @Param("productId") int productId);
+
+    List<OrderitemProduct> findOPByordId(int ordersId);
 }

@@ -5,14 +5,13 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.xzy.beans.Orderitem;
+
 import com.xzy.config.AlipayConfig;
-import com.xzy.service.OrderItemService;
-import com.xzy.service.OrdersService;
-import com.xzy.service.ProductService;
 import com.xzy.service.serviceImp.OrderItemServiceImp;
 import com.xzy.service.serviceImp.OrdersServiceImp;
-import com.xzy.service.serviceImp.ProductServiceImp;
+import com.xzy.service.ProductService;
+import com.xzy.beans.OrderitemProduct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +25,9 @@ import java.util.*;
 @RequestMapping("/orderHandle")
 public class OrderHandleController {
     @Autowired
-    private OrdersService os;
+    private OrdersServiceImp os;
     @Autowired
-    private OrderItemService ois;
+    private OrderItemServiceImp ois;
     @Autowired
     private ProductService ps;
 
@@ -128,17 +127,18 @@ public class OrderHandleController {
     2、查询待支付订单
     3、查询待发货订单
     4、查询待收货订单
+    5、查询一个订单（确定订单）
      */
     //订单详情页面（全部状态）
     @RequestMapping("/findAllOrderItem")
-    public List<Orderitem> findAllOrderItem() {
-        List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
+    public List<OrderitemProduct> findAllOrderItem() {
+        List<OrderitemProduct> allOrderitems = new ArrayList<OrderitemProduct>();
         List<Integer> allOrdId = os.findAllOrdId();
         Iterator<Integer> allOrdIds = allOrdId.iterator();
         while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
-            Iterator<Orderitem> iterator = allOrderitem.iterator();
+            List<OrderitemProduct> allOrderitem = ois.findAllOPByOrdId(orderId);
+            Iterator<OrderitemProduct> iterator = allOrderitem.iterator();
             while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
@@ -148,14 +148,14 @@ public class OrderHandleController {
 
     //待支付订单
     @RequestMapping("/findPayOrderItem")
-    public List<Orderitem> findPayOrderItem() {
-        List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
+    public List<OrderitemProduct> findPayOrderItem() {
+        List<OrderitemProduct> allOrderitems = new ArrayList<OrderitemProduct>();
         List<Integer> payOrdId = os.findPay();
         Iterator<Integer> allOrdIds = payOrdId.iterator();
         while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
-            Iterator<Orderitem> iterator = allOrderitem.iterator();
+            List<OrderitemProduct> allOrderitem = ois.findAllOPByOrdId(orderId);
+            Iterator<OrderitemProduct> iterator = allOrderitem.iterator();
             while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
@@ -165,14 +165,14 @@ public class OrderHandleController {
 
     //待发货订单
     @RequestMapping("/findSendOrderItem")
-    public List<Orderitem> findSendOrderItem() {
-        List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
+    public List<OrderitemProduct> findSendOrderItem() {
+        List<OrderitemProduct> allOrderitems = new ArrayList<OrderitemProduct>();
         List<Integer> sendOrdId = os.findSend();
         Iterator<Integer> allOrdIds = sendOrdId.iterator();
         while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
-            Iterator<Orderitem> iterator = allOrderitem.iterator();
+            List<OrderitemProduct> allOrderitem = ois.findAllOPByOrdId(orderId);
+            Iterator<OrderitemProduct> iterator = allOrderitem.iterator();
             while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
@@ -182,14 +182,14 @@ public class OrderHandleController {
 
     //待收货订单
     @RequestMapping("/findGetOrderItem")
-    public List<Orderitem> findGetOrderItem() {
-        List<Orderitem> allOrderitems = new ArrayList<Orderitem>();
+    public List<OrderitemProduct> findGetOrderItem() {
+        List<OrderitemProduct> allOrderitems = new ArrayList<OrderitemProduct>();
         List<Integer> getOrdId = os.findGet();
         Iterator<Integer> allOrdIds = getOrdId.iterator();
         while (allOrdIds.hasNext()) {
             Integer orderId = allOrdIds.next();
-            List<Orderitem> allOrderitem = ois.findAllOIByOrdId(orderId);
-            Iterator<Orderitem> iterator = allOrderitem.iterator();
+            List<OrderitemProduct> allOrderitem = ois.findAllOPByOrdId(orderId);
+            Iterator<OrderitemProduct> iterator = allOrderitem.iterator();
             while (iterator.hasNext()) {
                 allOrderitems.add(iterator.next());
             }
@@ -197,7 +197,16 @@ public class OrderHandleController {
         return allOrderitems;
     }
 
+
+    //确定订单（订单详情，总价，总个数）
+    @RequestMapping("/findOneOrderItem")
+    public List<OrderitemProduct> findOneOrderItem(int orderId) {
+        List<OrderitemProduct> allOrderitem = ois.findAllOPByOrdId(orderId);
+        return allOrderitem;
+    }
+
     @RequestMapping("/alipayIumpSum")
+
     public String alipayIumpSum(Model model, HttpServletResponse response, HttpServletRequest request) throws AlipayApiException, UnsupportedEncodingException {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
@@ -209,6 +218,7 @@ public class OrderHandleController {
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
         //String out_trade_no =
+
         String out_trade_no = new String(request.getParameter("WIDout_trade_no").getBytes("ISO-8859-1"), "UTF-8");
         //付款金额，必填
         String total_amount = new String(request.getParameter("WIDtotal_amount").getBytes("ISO-8859-1"), "UTF-8");
@@ -235,88 +245,93 @@ public class OrderHandleController {
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
         for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-            String name = (String) iter.next();
-            String[] values = (String[]) requestParams.get(name);
-            String valueStr = "";
-            for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                String name = (String) iter.next();
+                String[] values = (String[]) requestParams.get(name);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                }
+                //乱码解决，这段代码在出现乱码时使用
+                valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+                params.put(name, valueStr);
             }
-            //乱码解决，这段代码在出现乱码时使用
-            valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-            params.put(name, valueStr);
-        }
-        //调用SDK验证签名
-        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type);
-        //处理业务逻辑
+            //调用SDK验证签名
+            boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type);
+            //处理业务逻辑
         /* 实际验证过程建议商户务必添加以下校验：
 	    1、需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
 	    2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
 	    3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
 	    4、验证app_id是否为该商户本身。
 	    */
-        if (signVerified) {//商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
+            if (signVerified) {//商户订单号
+                String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
+                //支付宝交易号
+                String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            //交易状态
-            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
-            if (trade_status.equals("TRADE_FINISHED")) {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
+                //交易状态
+                String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
+                if (trade_status.equals("TRADE_FINISHED")) {
+                                    //判断该笔订单是否在商户网站中已经做过处理
+                                    //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+                                    //如果有做过处理，不执行商户的业务程序
 
-                //注意：
-                //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
-            } else if (trade_status.equals("TRADE_SUCCESS")) {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
+                                    //注意：
+                                    //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 
-                //注意：
-                //付款完成后，支付宝系统发送该交易状态通知
-            }
-            return "success";
-        } else {//验证失败
-            return "fail";
-        }
-    }
+                        } else if (trade_status.equals("TRADE_SUCCESS")) {
 
-    @GetMapping("/returnUrl")
-    private String returnUrl(HttpServletRequest request)
+                            //判断该笔订单是否在商户网站中已经做过处理
+                            //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+                            //如果有做过处理，不执行商户的业务程序
+
+                            //注意：
+                            //付款完成后，支付宝系统发送该交易状态通知
+                        }
+                        return "success";
+
+                    } else {//验证失败
+                        return "fail";
+                    }
+                }
+
+                @GetMapping("/returnUrl")
+                private String returnUrl (HttpServletRequest request)
             throws AlipayApiException, UnsupportedEncodingException {
-        Map<String, String> params = new HashMap<String, String>();
-        Map<String, String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
-            String name = (String) iter.next();
-            String[] values = (String[]) requestParams.get(name);
-            String valueStr = "";
-            for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i]
-                        : valueStr + values[i] + ",";
-            }
-            //乱码解决，这段代码在出现乱码时使用
-            valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-            params.put(name, valueStr);
-        }
+                    Map<String, String> params = new HashMap<String, String>();
+                    Map<String, String[]> requestParams = request.getParameterMap();
+                    for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
 
-        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
+                            String name = (String) iter.next();
+                            String[] values = (String[]) requestParams.get(name);
+                            String valueStr = "";
+                            for (int i = 0; i < values.length; i++) {
+                                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                                        : valueStr + values[i] + ",";
+                            }
+                            //乱码解决，这段代码在出现乱码时使用
+                            valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+                            params.put(name, valueStr);
+                        }
 
-        //——请在这里编写您的程序（以下代码仅作参考）——
-        if (signVerified) {
-            //商户订单号
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
+                        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
 
-            //支付宝交易号
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
+                        //——请在这里编写您的程序（以下代码仅作参考）——
 
-            //付款金额
-            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
+                        if (signVerified) {
+                            //商户订单号
+                            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 
-            return "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount;
-        } else {
-            return "验签失败";
-        }
-    }
-}
+                            //支付宝交易号
+                            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"), "UTF-8");
+
+                            //付款金额
+                            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
+
+                            return "trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount;
+                        } else {
+                                return "验签失败";
+                            }
+                        }
+                    }

@@ -4,11 +4,11 @@ import java.util.List;
 
 /**
  * @author cairunduo
- * @date 2019/8/12 - 0:23
+ * @date 2019/8/13 - 3:09
  */
 public interface OrdersService {
     //单点购买增加(生成)订单
-    int addOrderBy01(/*HttpServletRequest hsr*/int userId, int addressId, int productId, int num);
+    int addOrderBy01(int userId, int addressId, int productId, int num);
 
     //通过购物车增加(生成)订单
     int addOrderBy02(int userId, int addressId, float ordersTotalPrice);

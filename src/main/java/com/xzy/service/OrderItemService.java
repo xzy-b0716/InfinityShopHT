@@ -1,12 +1,12 @@
 package com.xzy.service;
 
-import com.xzy.beans.Orderitem;
+import com.xzy.beans.OrderitemProduct;
 
 import java.util.List;
 
 /**
  * @author cairunduo
- * @date 2019/8/12 - 0:22
+ * @date 2019/8/13 - 3:08
  */
 public interface OrderItemService {
     //单点购买增加(生成)订单项
@@ -22,5 +22,5 @@ public interface OrderItemService {
     int deleteOrderitem(int OrdersId);
 
     //查询所有订单项
-    List<Orderitem> findAllOIByOrdId(int ordersId);
+    List<OrderitemProduct> findAllOPByOrdId(int ordersId);
 }
