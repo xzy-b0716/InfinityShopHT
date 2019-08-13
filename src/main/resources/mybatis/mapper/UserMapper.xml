@@ -28,20 +28,19 @@
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
 
-    <!--根据用户名查询user-->
-    <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM `user`
-        WHERE user_name = '${userName}'
-    </select>
+  <!--根据用户名查询user-->
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+     SELECT
+    <include refid="Base_Column_List" />
+     FROM `user`
+     WHERE user_name = #{userName}
+  </select>
 
     <select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
     SELECT COUNT(1)
     FROM `user`
     WHERE user_name = #{userName}
   </select>
-
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
@@ -137,14 +136,14 @@
     <update id="updatePicByUserId" parameterType="com.xzy.beans.User">
     UPDATE `user`
     SET
-    user_pic = '${userPic}'
+    user_pic = #{userPic}
     WHERE user_id = #{userId}
   </update>
 
     <!--修改用户昵称-->
     <update id="updateRealByUserId" parameterType="com.xzy.beans.User">
     UPDATE `user`
-    SET user_real = '${userReal}'
+    SET user_real = #{userReal}
     WHERE user_id = #{userId}
   </update>
 
@@ -154,7 +153,6 @@
     SET user_password = #{userPassword}
     WHERE user_id = #{userId}
   </update>
-
 
     <update id="updateByPrimaryKeySelective" parameterType="com.xzy.beans.User">
         update user
@@ -192,6 +190,7 @@
         </set>
         where user_id = #{userId,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xzy.beans.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
@@ -206,6 +205,7 @@
       user_background = #{userBackground,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
     <update id="updateByPrimaryKey" parameterType="com.xzy.beans.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
@@ -218,6 +218,7 @@
       user_sex = #{userSex,jdbcType=CHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
     <select id="getUserById" resultMap="BaseResultMap">
   select * from user where user_id = #{userId}
 </select>

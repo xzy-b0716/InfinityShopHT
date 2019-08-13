@@ -1,7 +1,8 @@
 package com.xzy.service.serviceImp;
 
 import com.xzy.beans.Address;
-import com.xzy.exception.InfintyException;
+import com.xzy.common.ResponseCode;
+import com.xzy.common.ServerResponse;
 import com.xzy.mapper.AddressMapper;
 import com.xzy.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +29,27 @@ public class AddressServiceImp implements AddressService {
      * @return
      */
     @Override
-    public List<Address> getUserAllAddress(Integer userId) {
+    public ServerResponse<List<Address>> getUserAllAddress(Integer userId) {
         List<Address> list = tbAddressMapper.selectUserAllAddress(userId);
-        if (list == null) {
-            throw new InfintyException("获取地址列表信息失败");
+        if (list.isEmpty()) {
+            return ServerResponse.createByErrorMessage("没有该用户的地址");
         }
-        return list;
+        return ServerResponse.createBySuccess("返回地址列成功",list);
     }
 
     /**
-     * 获取单个地址信息的实现方法
+     * 获取单个址信息的实现方法
      *
      * @param addressId
      * @return
      */
     @Override
-    public Address getAddress(Integer addressId) {
+    public ServerResponse<Address> getAddress(Integer addressId) {
         Address address = tbAddressMapper.selectByPrimaryKey(addressId);
-        if (address == null) {
-            throw new InfintyException("通过id获取地址失败");
+        if (address==null){
+            return ServerResponse.createByErrorMessage("此用户没有该地址");
         }
-        return address;
+        return ServerResponse.createBySuccess(ResponseCode.SUCCESS.getDesc(),address);
     }
 
     /**
@@ -58,15 +59,15 @@ public class AddressServiceImp implements AddressService {
      * @return
      */
     @Override
-    public int addAddress(Integer userId, Address address) {
+    public ServerResponse addAddress(Integer userId, Address address) {
         address.setUserId(userId);
         //设置唯一默认
         setOneDefault(address);
         int rowCount = tbAddressMapper.insert(address);
-        if (rowCount == 0) {
-            throw new InfintyException("添加地址失败");
+        if (rowCount<1){
+            return ServerResponse.createByErrorMessage("添加地址失败");
         }
-        return 1;
+        return ServerResponse.createBySuccess("添加地址成功");
     }
 
     /**
@@ -76,15 +77,14 @@ public class AddressServiceImp implements AddressService {
      * @return
      */
     @Override
-    public int updateAddress(Address address) {
+    public ServerResponse updateAddress(Integer userId,Address address) {
         //设置唯一默认
         setOneDefault(address);
-
-        int update = tbAddressMapper.updateByPrimaryKey(address);
-        if (update != 1) {
-            throw new InfintyException("修改地址信息失败");
+        int update = tbAddressMapper.updateByPrimaryKeySelective(address);
+        if (update < 1) {
+            return ServerResponse.createByErrorMessage("修改地址失败");
         }
-        return 1;
+        return ServerResponse.createBySuccess("修改地址成功");
     }
 
     /**
@@ -94,8 +94,10 @@ public class AddressServiceImp implements AddressService {
      */
     private void setOneDefault(Address address) {
         if (address.getAddressDefalut()) {
-            List<Address> list = getUserAllAddress(address.getUserId());
-            for (Address address1 : list) {
+
+            ServerResponse<List<Address>> serverResponse = getUserAllAddress(address.getUserId());
+            List<Address> list = serverResponse.getData();
+            for (Address address1:list){
                 address1.setAddressDefalut(false);
                 tbAddressMapper.updateByPrimaryKey(address1);
             }
@@ -109,11 +111,11 @@ public class AddressServiceImp implements AddressService {
      * @return
      */
     @Override
-    public int delAddress(Integer addressId) {
+    public ServerResponse delAddress(Integer addressId) {
         int delete = tbAddressMapper.deleteByPrimaryKey(addressId);
-        if (delete != 1) {
-            throw new InfintyException("删除地址失败");
+        if (delete < 1){
+            return ServerResponse.createByErrorMessage("删除地址失败");
         }
-        return 1;
+        return ServerResponse.createBySuccess("删除地址成功");
     }
 }

@@ -19,7 +19,6 @@ import java.util.Map;
  * @date 2019/8/3 - 15:23
  */
 @RestController
-@RequestMapping(value = "/user/")
 public class UserContorller {
 
     @Autowired
@@ -33,6 +32,7 @@ public class UserContorller {
      */
     @RequestMapping(value = "getUser.do", method = RequestMethod.POST)
     public User getUser(HttpSession session) {
+
         User user = (User) session.getAttribute(Cont.CURRENT_USER);
         if (user != null) {
             throw new InfintyException("当前用户不存在或未登录");
@@ -90,7 +90,6 @@ public class UserContorller {
         if (user == null) {
             throw new InfintyException("当前用户不存在或未登录");
         }
-
         Integer updatePassword = userService.updatePassword(password, user.getUserId());
         return updatePassword;
     }
@@ -162,5 +161,4 @@ public class UserContorller {
         int updateSex = userService.updateUserSex(user.getUserId(), userSex);
         return updateSex;
     }
-
 }
