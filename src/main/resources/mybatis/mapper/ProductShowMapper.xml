@@ -53,32 +53,5 @@
   LEFT JOIN carousel c ON (c.`product_id`=p.`product_id`)
   WHERE  p.`product_id` =#{productId}
 </select>
-  <!--根据商品id查询用户浏览记录表-->
-  <resultMap id="userHistory" type="com.xzy.beans.Browse">
-    <id column="browse_id" property="browseId"/>
-    <result column="browse_time" property="browseTime"/>
-    <result column="user_id" property="userId"/>
-    <result column="product_id" property="productId"/>
-  </resultMap>
-  <!--更新用户历史记录表-->
-  <update id="updateHistory" parameterType="com.xzy.beans.Browse">
-        UPDATE browse SET browse_time=#{browseTime} WHERE user_id=#{userId} AND product_id=#{productId}
-    </update>
-  <!--将商品插入浏览历史表-->
-  <insert id="insertHistory" parameterType="com.xzy.beans.Browse">
-        INSERT INTO browse (browse_time,user_id,product_id) VALUES (#{browseTime},#{userId},#{productId})
-    </insert>
-  <!--根据用户id查询浏览记录-->
-  <select id="selectHistoryByUserId" parameterType="Integer" resultMap="userHistory">
-        SELECT product_id,browse_time FROM browse b
-         WHERE  user_id=#{userId} order by browse_time desc
-    </select>
-  <!--根据用户id和商品id查询浏览记录-->
-  <select id="selectHistoryByUserIdAndProductId" parameterType="com.xzy.beans.Browse" resultMap="userHistory">
-        SELECT b.* FROM browse b WHERE  user_id=#{userId} AND product_id=#{productId}
-    </select>
-  <!--删除一条浏览记录-->
-  <delete id="deleteHistory" >
-        delete from browse where product_id=#{productId} and user_id = #{userId}
-    </delete>
+
 </mapper>

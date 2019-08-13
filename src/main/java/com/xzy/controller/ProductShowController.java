@@ -2,13 +2,8 @@ package com.xzy.controller;
 
 import com.xzy.beans.*;
 import com.xzy.common.ServerResponse;
-import com.xzy.common.ResponseCode;
-import com.xzy.service.CollectService;
-import com.xzy.service.InformationService;
-import com.xzy.service.ProductDiscussService;
-import com.xzy.service.ProductShowService;
+import com.xzy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +17,8 @@ import java.util.*;
 @RestController
 public class ProductShowController {
     @Autowired
+    private BrowerService browerService;
+    @Autowired
     private ProductShowService productService;
     @Autowired
     private ProductDiscussService productDiscussService;
@@ -31,20 +28,23 @@ public class ProductShowController {
     private ProductShowService productShowService;
     @Autowired
     private InformationService informationService;
+    public boolean collect(int flag){
+        boolean like = false;
+        if (flag == 1) {
+            like = true;
+        }
+        return  like;
+    }
     @RequestMapping("/productAll")
     public ServerResponse productAll(Integer productId, Integer userId) {
         if (productId == null || productId.equals("")) {
             String msg = "productId为空或者为null";
             return ServerResponse.createByErrorMessage(msg);
         }
-        ProductShow p = productService.selectProductAll(productId);
+        ProductShow p = productShowService.selectProductAll(productId);
         p.setInformation(informationService.selectInformation(productId));
-        int num = collectService.isCollect(productId, userId);
-        boolean like = false;
-        if (num == 1) {
-            like = true;
-        }
-        p.setCollect(like);
+//        p.setLike(productService.selectClassProductByProductId(productId));
+        p.setCollect(collect(collectService.isCollect(productId, userId)));
         int count = productDiscussService.countDiscuss(productId);
         p.setDiscussCount(productDiscussService.countDiscuss(productId));
         if (count == 0) {
@@ -62,16 +62,16 @@ public class ProductShowController {
             Browse userHistory=new Browse();
             userHistory.setProductId(productId);
             userHistory.setUserId(userId);
-            Browse userHistory1=productShowService.getHistoryByUserIdAndProductId(userHistory);
+            Browse userHistory1=browerService.getHistoryByUserIdAndProductId(userHistory);
             if(userHistory1 ==null){
                 Browse userHistory2=new Browse();
                 userHistory2.setBrowseTime(new Date());
                 userHistory2.setUserId(userHistory.getUserId());
                 userHistory2.setProductId(userHistory.getProductId());
-                productShowService.insertProductHistory(userHistory2);
+                browerService.insertProductHistory(userHistory2);
             }else{
                 userHistory1.setBrowseTime(new Date());
-                productShowService.updateHistory(userHistory1);
+                browerService.updateHistory(userHistory1);
             }
         }
 
@@ -82,17 +82,20 @@ public class ProductShowController {
     @ResponseBody
     public List<Browse> selectHistory(HttpSession session,Integer userId){
 //        User user=(User)session.getAttribute("user");
-        List<Browse> userHistories=productShowService.getHistoryByUserId(userId);
-
+        List<Browse> userHistories=browerService.getHistoryByUserId(userId);
+        for( Browse browse :userHistories){
+            int productId =browse.getProductId();
+            browse.setCollect(collect(collectService.isCollect(productId, userId)));
+        }
         return userHistories;
 }
 
 
     @RequestMapping("/deleteHistory")
     @ResponseBody
-    public String deleteHistory(Integer productId,Integer userId)
+    public String deleteHistory(Integer userId, Integer productId)
     {
-        productShowService.delete(productId,userId);
+        browerService.delete(userId,productId);
         return "yes";
     }
 
