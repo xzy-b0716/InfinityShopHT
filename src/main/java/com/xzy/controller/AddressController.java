@@ -1,17 +1,14 @@
 package com.xzy.controller;
 
 import com.xzy.beans.Address;
-import com.xzy.beans.User;
-import com.xzy.common.Cont;
-import com.xzy.exception.InfintyException;
+import com.xzy.common.ResponseCode;
+import com.xzy.common.ServerResponse;
 import com.xzy.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -19,20 +16,23 @@ import java.util.List;
  * @date 2019/8/1 - 21:30
  */
 @RestController
-@RequestMapping(value = "/address/")
+@RequestMapping(value = "/address")
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
-    /**
+   /**
      * 获取用户收货地址列表
      * @param userId
      * @return
      */
-    @RequestMapping(value = "addressList",method = RequestMethod.POST)
-    public List<Address> addressList(Integer userId){
-        List<Address> list = addressService.getUserAllAddress(userId);
+    @GetMapping(value = "/addressList")
+    public ServerResponse<List<Address>> addressList(Integer userId){
+        if (userId==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
+        }
+        ServerResponse<List<Address>> list = addressService.getUserAllAddress(userId);
         return list;
     }
 
@@ -41,9 +41,12 @@ public class AddressController {
      * @param addressId
      * @return
      */
-    @RequestMapping(value = "address",method = RequestMethod.POST)
-    public Address address(Integer addressId){
-        Address address=addressService.getAddress(addressId);
+    @GetMapping(value = "/getaddressById")
+    public ServerResponse<Address> getaddressById(Integer addressId){
+        if (addressId == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
+        }
+        ServerResponse<Address> address = addressService.getAddress(addressId);
         return address;
     }
 
@@ -52,14 +55,16 @@ public class AddressController {
      * @param tbAddress
      * @return
      */
-    @RequestMapping(value = "addAddress",method = RequestMethod.POST)
-    public int addAddress(HttpSession session, Address tbAddress){
+    @GetMapping(value = "/addAddress")
+    public ServerResponse addAddress(Integer userId,Address tbAddress){
         //通过session获取user
-        User user = (User) session.getAttribute(Cont.CURRENT_USER);
-        if (user == null){
-            throw new InfintyException("用户未登录");
+        //HttpSession session,
+        //User user = (User) session.getAttribute(Cont.CURRENT_USER);
+        if (userId == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return addressService.addAddress(user.getUserId(),tbAddress);
+        ServerResponse addAddress = addressService.addAddress(userId, tbAddress);
+        return addAddress;
     }
 
     /**
@@ -67,10 +72,13 @@ public class AddressController {
      * @param tbAddress
      * @return
      */
-    @RequestMapping(value = "updateAddress",method = RequestMethod.POST)
-    public Integer updateAddress(@RequestBody Address tbAddress){
-        int result = addressService.updateAddress(tbAddress);
-        return result;
+    @GetMapping(value = "/updateAddress")
+    public ServerResponse updateAddress(Integer userId,Address tbAddress){
+        if (userId==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+        ServerResponse updateAddress = addressService.updateAddress(userId, tbAddress);
+        return updateAddress;
     }
 
     /**
@@ -78,9 +86,12 @@ public class AddressController {
      * @param addressId
      * @return
      */
-    @RequestMapping(value = "delAddress",method = RequestMethod.POST)
-    public Integer delAddress(@RequestBody Integer addressId){
-        int result = addressService.delAddress(addressId);
-        return result;
+    @GetMapping(value = "/delAddress")
+    public ServerResponse delAddress(Integer addressId){
+        if (addressId == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
+        }
+        ServerResponse delAddress = addressService.delAddress(addressId);
+        return delAddress;
     }
 }

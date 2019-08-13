@@ -19,7 +19,6 @@ import java.util.Map;
  * @date 2019/8/3 - 15:23
  */
 @RestController
-@RequestMapping(value = "/user/")
 public class UserContorller {
 
     @Autowired
@@ -30,7 +29,7 @@ public class UserContorller {
      * @param session
      * @return
      */
-    @RequestMapping(value = "getUser.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/getUser.do",method = RequestMethod.POST)
     public User getUser(HttpSession session){
         User user = (User) session.getAttribute(Cont.CURRENT_USER);
         if (user!= null){
@@ -45,7 +44,7 @@ public class UserContorller {
      * @param picFile
      * @return
      */
-    @RequestMapping(value = "updateUserPic.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserPic.do",method = RequestMethod.POST)
     public Object updateUserPic(HttpSession session , MultipartFile picFile){
         User user = getUser(session);
         if (user==null){
@@ -62,7 +61,7 @@ public class UserContorller {
      * @param real
      * @return
      */
-    @RequestMapping(value = "updateUserReal.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserReal.do",method = RequestMethod.POST)
     public int updateUserReal(HttpSession session,String real){
         User user1 = (User) session.getAttribute(Cont.CURRENT_USER);
         if (user1 == null){
@@ -80,13 +79,12 @@ public class UserContorller {
      * @param password
      * @return
      */
-    @RequestMapping(value = "updateUserPwd.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserPwd.do",method = RequestMethod.POST)
     public int updateUserPwd(HttpSession session,String password){
         User user = getUser(session);
         if (user==null){
             throw new InfintyException("当前用户不存在或未登录");
         }
-
         Integer updatePassword = userService.updatePassword(password, user.getUserId());
         return updatePassword;
     }
@@ -97,7 +95,7 @@ public class UserContorller {
      * @param email
      * @return
      */
-    @RequestMapping(value = "updateUserEmail.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserEmail.do",method = RequestMethod.POST)
     public int updateUserEmail(HttpSession session,String email){
         User user = getUser(session);
         if (user==null){
@@ -113,7 +111,7 @@ public class UserContorller {
      * @param userTel
      * @return
      */
-    @RequestMapping(value = "updateUserTel.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserTel.do",method = RequestMethod.POST)
     public int updateUserTel(HttpSession session,String userTel){
         User user = getUser(session);
         if (user==null){
@@ -129,7 +127,7 @@ public class UserContorller {
      * @param userBirth
      * @return
      */
-    @RequestMapping(value = "updateBirth.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateBirth.do",method = RequestMethod.POST)
     public int updateBirth(HttpSession session, Date userBirth){
         User user = getUser(session);
         if (user==null){
@@ -145,7 +143,7 @@ public class UserContorller {
      * @param userSex
      * @return
      */
-    @RequestMapping(value = "updateSex.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateSex.do",method = RequestMethod.POST)
     public int updateSex(HttpSession session,String userSex){
         User user = getUser(session);
         if (user==null){
@@ -154,5 +152,4 @@ public class UserContorller {
         int updateSex = userService.updateUserSex(user.getUserId(), userSex);
         return updateSex;
     }
-
 }

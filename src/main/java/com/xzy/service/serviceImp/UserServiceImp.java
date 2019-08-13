@@ -7,6 +7,7 @@ import com.xzy.mapper.UserMapper;
 import com.xzy.service.UserService;
 import com.xzy.utils.FileTool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @author shixiao
  * @date 2019/8/3 - 15:24
  */
+@Service
 public class UserServiceImp implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -184,7 +186,6 @@ public class UserServiceImp implements UserService {
         int update = userMapper.updatePicByUserId(user);
         return update;
     }
-
 
 
 }

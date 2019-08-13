@@ -32,7 +32,7 @@
      SELECT
     <include refid="Base_Column_List" />
      FROM `user`
-     WHERE user_name = '${userName}'
+     WHERE user_name = #{userName}
   </select>
 
   <select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -41,13 +41,7 @@
     WHERE user_name = #{userName}
   </select>
 
-  <select id="selectLogin" resultType="BaseResultMap" parameterType="java.util.Map">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM `user`
-    WHERE user_name = #{userName}
-    AND user_password = #{userPassword}
-  </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
@@ -143,14 +137,14 @@
   <update id="updatePicByUserId" parameterType="com.xzy.beans.User">
     UPDATE `user`
     SET
-    user_pic = '${userPic}'
+    user_pic = #{userPic}
     WHERE user_id = #{userId}
   </update>
 
   <!--修改用户昵称-->
   <update id="updateRealByUserId" parameterType="com.xzy.beans.User">
     UPDATE `user`
-    SET user_real = '${userReal}'
+    SET user_real = #{userReal}
     WHERE user_id = #{userId}
   </update>
 
