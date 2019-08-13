@@ -1,6 +1,5 @@
 package com.xzy.service.serviceImp;
 
-import com.xzy.beans.ProductDiscuss;
 import com.xzy.mapper.ProductDiscussMapper;
 import com.xzy.service.ProductDiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,6 @@ public class ProductDiscussImp implements ProductDiscussService {
         return productDiscussMapper.countDiscuss(ProductId);
     }
 
-    @Override
-//    添加评论
-    public void insertDiscuss(ProductDiscuss productDiscuss) {
 
-        productDiscussMapper.insertSelective(productDiscuss);
-    }
 
 }
