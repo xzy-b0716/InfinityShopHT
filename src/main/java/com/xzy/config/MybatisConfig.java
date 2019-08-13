@@ -18,6 +18,7 @@ public class MybatisConfig {
             public void customize(Configuration configuration) {
                 //设置适应数据库中字段的驼峰命名法
                 configuration.setMapUnderscoreToCamelCase(true);
+
             }
         };
     }

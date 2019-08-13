@@ -39,7 +39,7 @@ public class ServerResponse<T> implements Serializable {
     }
 
     @JsonIgnore
-    //使之不在json对象中国
+    //使之不在json对象中
     public boolean isSuccess() {
         return this.status == ResponseCode.SUCCESS.getCode();
     }

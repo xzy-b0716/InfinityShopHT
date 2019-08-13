@@ -2,7 +2,6 @@ package com.xzy.mapper;
 
 import com.xzy.beans.Product;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

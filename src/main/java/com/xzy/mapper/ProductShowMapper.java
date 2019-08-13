@@ -1,9 +1,11 @@
 package com.xzy.mapper;
 
+
 import com.xzy.beans.Browse;
 import com.xzy.beans.ProductShow;
 
 import java.util.List;
+
 
 public interface ProductShowMapper {
     /**
@@ -12,7 +14,7 @@ public interface ProductShowMapper {
      *
      * @mbggenerated
      */
-//    删除一条浏览记录
+    //    删除一条浏览记录
     public void deleteHistory(Integer productId, Integer userId);
 
     //    根据用户id查询商品浏览记录表
