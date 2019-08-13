@@ -1,18 +1,18 @@
 package com.xzy.service.serviceImp;
 
 
-
 import com.xzy.beans.*;
 import com.xzy.mapper.OrderitemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class OrderItemServiceImp implements com.xzy.service.OrderItemService {
-    @Autowired
+    @Resource
     private OrderitemMapper oim;
 
    //单点购买增加(生成)订单项

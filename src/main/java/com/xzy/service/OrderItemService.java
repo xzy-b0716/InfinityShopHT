@@ -4,10 +4,6 @@ import com.xzy.beans.OrderitemProduct;
 
 import java.util.List;
 
-/**
- * @author cairunduo
- * @date 2019/8/13 - 3:08
- */
 public interface OrderItemService {
     //单点购买增加(生成)订单项
     int addOrderItemBy01(int productId, int num, int ordersId, String oiProductSize, String oiProductColor);
