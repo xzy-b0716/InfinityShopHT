@@ -2,6 +2,7 @@ package com.xzy.controller;
 
 import com.xzy.beans.Cart;
 import com.xzy.beans.CartItem;
+import com.xzy.beans.ServerResponse;
 import com.xzy.beans.User;
 import com.xzy.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,26 @@ public class CartController {
     /*展示购物车里面的所有商品*/
     @RequestMapping(value = "/selectAllCartItem")
     @ResponseBody
-    public List<CartItem> selectAllCartItem(Integer userId) {
+    public ServerResponse selectAllCartItem(Integer userId) {
 
         List<CartItem> cartItems = cartservice.selectAllCartItemByOneUser(1);
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getChecked() == 1) {
+        ServerResponse serverResponse=new ServerResponse();
+        serverResponse.setCartItems(cartItems);
+        if(serverResponse.getCartItems().size()>0){
+            serverResponse.setTotal(true);
+        }else{
+            serverResponse.setTotal(false);
+        }
+        for(CartItem cartItem:cartItems){
+            if(cartItem.getChecked()==0){
                 cartItem.setIschecked(true);
-            } else {
+            }else{
                 cartItem.setIschecked(false);
             }
         }
-        if (null != cartItems) {
-            return cartItems;
-        } else {
+        if(null!=serverResponse){
+            return serverResponse;
+        }else{
             return null;
         }
 
@@ -77,8 +85,8 @@ public class CartController {
             cart.setQuantity(1);
             cart.setIsAlive(1);
             cart.setChecked(1);
-            cart.setCpProductColor("粉色");
-            cart.setCpProductSize("X");
+            cart.setCpProductColor("green");
+            cart.setCpProductSize("L");
             System.out.println(cart);
             cartservice.insertCartItem(cart);
 
