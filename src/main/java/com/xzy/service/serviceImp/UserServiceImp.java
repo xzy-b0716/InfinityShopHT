@@ -1,6 +1,7 @@
 package com.xzy.service.serviceImp;
 
 import com.xzy.beans.User;
+import com.xzy.common.ServerResponse;
 import com.xzy.config.PreReadUploadConfig;
 import com.xzy.exception.InfintyException;
 import com.xzy.mapper.UserMapper;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,94 +48,6 @@ public class UserServiceImp implements UserService {
         User user = userMapper.selectByPrimaryKey(userId);
         return user;
     }
-
-
-    /**
-     * 修改密码   √
-     * @param userId
-     * @param userPassword
-     * @return
-     */
-    @Override
-    public Integer updatePassword(String userPassword,Integer userId){
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserPassword(userPassword);
-        int update = userMapper.updatePasswordByUsrId(user);
-        return update;
-    }
-
-    /**
-     * 修改昵称  √
-     * @param user
-     * @return
-     */
-    @Override
-    public Integer updateReal(User user) {
-        int update = userMapper.updateRealByUserId(user);
-        return update;
-    }
-
-    /**
-     * 修改邮箱
-     * @param userId
-     * @param userEmail
-     * @return
-     */
-    @Override
-    public int updateEmail(Integer userId,String userEmail){
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserEmail(userEmail);
-        int update = userMapper.updateByPrimaryKeySelective(user);
-        return update;
-    }
-
-    /**
-     * 修改电话号码
-     * @param userId
-     * @param userTel
-     * @return
-     */
-    @Override
-    public int updateTel(Integer userId,String userTel){
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserTel(userTel);
-        int update = userMapper.updateByPrimaryKeySelective(user);
-        return update;
-    }
-
-    /**
-     * 修改生日
-     * @param userId
-     * @param userBirth
-     * @return
-     */
-    @Override
-    public int updateUserBirth(Integer userId, Date userBirth){
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserBirth(userBirth);
-        int update = userMapper.updateByPrimaryKeySelective(user);
-        return update;
-    }
-
-    /**
-     * 修改性别
-     * @param userId
-     * @param sex
-     * @return
-     */
-    @Override
-    public int updateUserSex(Integer userId,String sex){
-        User user = new User();
-        user.setUserId(userId);
-        user.setUserSex(sex);
-        int update = userMapper.updateByPrimaryKeySelective(user);
-        return update;
-    }
-
 
     /**
      * 上传图片  √
@@ -188,4 +100,75 @@ public class UserServiceImp implements UserService {
     }
 
 
+    /**
+     * 登录用户更新密码
+     * @param passwordOld
+     * @param passwordNew
+     * @param user
+     * @return
+     */
+    public ServerResponse<String> resetPassword(String passwordOld,String passwordNew,User user){
+        //防止横向越权,要校验一下这个用户的旧密码,
+        // 一定要指定是这个用户.因为我们会查询一个count(1),如果不指定id,
+        // 那么结果就是true啦count>0;
+        int resultCount = userMapper.checkPassword(passwordOld, user.getUserId());
+        if (resultCount == 0){
+            return ServerResponse.createByErrorMessage("旧密码错误");
+        }
+        user.setUserPassword(passwordNew);
+        int updateCount = userMapper.updateByPrimaryKeySelective(user);
+        if (updateCount>0){
+            return ServerResponse.createBySuccessMessage("密码更新成功");
+        }
+        return ServerResponse.createByErrorMessage("密码更新失败");
+    }
+
+
+    /**
+     * 更新个人信息
+     * @param user
+     * @return
+     */
+    public ServerResponse<User> updateUserInfo(User user){
+        //username是不能被更新的
+        /*
+          email也要进行一个校验,校验新的email是不是已经存在,
+          并且存在的email如果相同的话,不能是我们当前的这个用户的.
+         */
+        int resultCount = userMapper.checkEmailByUserId(user.getUserEmail(), user.getUserId());
+        if (resultCount > 0 ){
+            return ServerResponse.createByErrorMessage("email已存在,请更换email再尝试更新");
+        }
+
+        User updateUser = new User();
+        updateUser.setUserId(user.getUserId());
+        updateUser.setUserName(user.getUserName());
+        updateUser.setUserEmail(user.getUserEmail());
+        updateUser.setUserTel(user.getUserTel());
+        updateUser.setUserBirth(user.getUserBirth());
+        updateUser.setUserPic(user.getUserPic());
+        updateUser.setUserReal(user.getUserReal());
+        updateUser.setUserSex(user.getUserSex());
+        updateUser.setUserBackground(user.getUserBackground());
+
+        int updateCount = userMapper.updateByPrimaryKeySelective(updateUser);
+        if (updateCount > 0){
+            return ServerResponse.createBySuccess("更新个人信息成功",updateUser);
+        }
+        return ServerResponse.createByErrorMessage("更新个人信息失败");
+    }
+
+    /**
+     * 根据userId查询user信息
+     * @param userId
+     * @return
+     */
+    public ServerResponse<User> getInformation(Integer userId){
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user == null){
+            return ServerResponse.createByErrorMessage("找不到当前用户");
+        }
+        user.setUserPassword("");
+        return ServerResponse.createBySuccess(user);
+    }
 }

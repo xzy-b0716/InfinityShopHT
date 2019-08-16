@@ -23,8 +23,6 @@ public interface UserMapper {
 
     int checkUserName(String userName);
 
-    User selectLogin(@Param("userName") String userName, @Param("userPassword")String userPassword);
-
     /**
      * 根据userId更新头像
      * @param user
@@ -32,17 +30,7 @@ public interface UserMapper {
      */
     int updatePicByUserId(User user);
 
-    /**
-     * 根据userId修改昵称
-     * @param user
-     * @return
-     */
-    int updateRealByUserId(User user);
+    int checkPassword(@Param("userPassword") String userPassword,@Param("userId") Integer userId);
 
-    /**
-     * 修改密码
-     * @param user
-     * @return
-     */
-    int updatePasswordByUsrId(User user);
+    int checkEmailByUserId(@Param("userEmail")String userEmail,@Param("userId")Integer userId);
 }

@@ -41,7 +41,19 @@
     WHERE user_name = #{userName}
   </select>
 
+  <select id="checkPassword" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT COUNT(1)
+    FROM `user`
+    WHERE user_password = #{userPassword}
+    AND user_id = #{userId}
+  </select>
 
+  <select id="checkEmailByUserId" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT COUNT(1)
+    FROM `user`
+    WHERE user_email = #{userEmali}
+    AND user_id != #{userId}
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
@@ -55,7 +67,7 @@
       user_pic)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userBirth,jdbcType=TIMESTAMP}, 
-      #{userCreat,jdbcType=DATE}, #{userReal,jdbcType=VARCHAR}, #{userSex,jdbcType=CHAR}, 
+      now(), #{userReal,jdbcType=VARCHAR}, #{userSex,jdbcType=CHAR},
       #{userPic,jdbcType=VARCHAR},#{userBackground,jdbcType=VARCHAR})
   </insert>
 
@@ -116,7 +128,7 @@
         #{userBirth,jdbcType=TIMESTAMP},
       </if>
       <if test="userCreat != null" >
-        #{userCreat,jdbcType=DATE},
+        now(),
       </if>
       <if test="userReal != null" >
         #{userReal,jdbcType=VARCHAR},
@@ -128,7 +140,7 @@
         #{userPic,jdbcType=VARCHAR},
       </if>
       <if test="userBackground != null" >
-        user_background,
+        #{user_background},
       </if>
     </trim>
   </insert>
@@ -138,20 +150,6 @@
     UPDATE `user`
     SET
     user_pic = #{userPic}
-    WHERE user_id = #{userId}
-  </update>
-
-  <!--修改用户昵称-->
-  <update id="updateRealByUserId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET user_real = #{userReal}
-    WHERE user_id = #{userId}
-  </update>
-
-  <!--修改密码-->
-  <update id="updatePasswordByUsrId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET user_password = #{userPassword}
     WHERE user_id = #{userId}
   </update>
 
@@ -175,7 +173,7 @@
         user_birth = #{userBirth,jdbcType=TIMESTAMP},
       </if>
       <if test="userCreat != null" >
-        user_creat = #{userCreat,jdbcType=DATE},
+        user_creat = now(),
       </if>
       <if test="userReal != null" >
         user_real = #{userReal,jdbcType=VARCHAR},
@@ -192,6 +190,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xzy.beans.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
