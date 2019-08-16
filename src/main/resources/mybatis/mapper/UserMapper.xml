@@ -20,6 +20,69 @@
     user_real, user_sex, user_pic, user_background
   </sql>
 
+  <select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(1)
+    FROM `user`
+    WHERE user_name = #{userName}
+  </select>
+
+  <select id="checkUserEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where user_email = #{email}
+  </select>
+
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+      <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName}
+    and user_password = #{userPassword}
+  </select>
+
+  <select id="selectLoginByEmail" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_email = #{userEmail}
+    and user_password = #{userPassword}
+  </select>
+
+  <select id="checkUserTel" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where user_tel = #{userTel}
+  </select>
+
+  <select id="selectLoginByTel" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_tel = #{userTel}
+    and user_password = #{userPassword}
+  </select>
+
+  <insert id="insert" parameterType="com.xzy.beans.User" >
+    insert into user (user_name, user_password,
+      user_email, user_tel)
+    values (#{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
+      #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -35,29 +98,10 @@
      WHERE user_name = #{userName}
   </select>
 
-  <select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(1)
-    FROM `user`
-    WHERE user_name = #{userName}
-  </select>
-
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-
-  <insert id="insert" parameterType="com.xzy.beans.User" >
-    insert into user (user_id, user_name, user_password, 
-      user_email, user_tel, user_birth, 
-      user_creat, user_real, user_sex, 
-      user_pic)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userEmail,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userBirth,jdbcType=TIMESTAMP}, 
-      #{userCreat,jdbcType=DATE}, #{userReal,jdbcType=VARCHAR}, #{userSex,jdbcType=CHAR}, 
-      #{userPic,jdbcType=VARCHAR},#{userBackground,jdbcType=VARCHAR})
-  </insert>
 
   <insert id="insertSelective" parameterType="com.xzy.beans.User" >
     insert into user
@@ -128,33 +172,10 @@
         #{userPic,jdbcType=VARCHAR},
       </if>
       <if test="userBackground != null" >
-        user_background,
+        #{user_background,jdbcType=VARCHAR}
       </if>
     </trim>
   </insert>
-
-  <!--修改用户头像-->
-  <update id="updatePicByUserId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET
-    user_pic = #{userPic}
-    WHERE user_id = #{userId}
-  </update>
-
-  <!--修改用户昵称-->
-  <update id="updateRealByUserId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET user_real = #{userReal}
-    WHERE user_id = #{userId}
-  </update>
-
-  <!--修改密码-->
-  <update id="updatePasswordByUsrId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET user_password = #{userPassword}
-    WHERE user_id = #{userId}
-  </update>
-
 
   <update id="updateByPrimaryKeySelective" parameterType="com.xzy.beans.User" >
     update user

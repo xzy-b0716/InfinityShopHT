@@ -21,28 +21,21 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+    //查用户
     int checkUserName(String userName);
 
+    //查邮箱
+    int checkUserEmail(String email);
+
+    //用户查询
     User selectLogin(@Param("userName") String userName, @Param("userPassword")String userPassword);
 
-    /**
-     * 根据userId更新头像
-     * @param user
-     * @returne
-     */
-    int updatePicByUserId(User user);
+    //用户邮箱查询
+    User selectLoginByEmail(@Param("userEmail") String userEmail, @Param("userPassword")String userPassword);
 
-    /**
-     * 根据userId修改昵称
-     * @param user
-     * @return
-     */
-    int updateRealByUserId(User user);
+    //查电话
+    int checkUserTel(String userTel);
 
-    /**
-     * 修改密码
-     * @param user
-     * @return
-     */
-    int updatePasswordByUsrId(User user);
+    //用户电话查询
+    User selectLoginByTel(@Param("userTel") String userTel, @Param("userPassword")String userPassword);
 }
