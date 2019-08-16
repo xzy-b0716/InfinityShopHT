@@ -1,6 +1,7 @@
 package com.xzy.service;
 
 import com.xzy.beans.User;
+import com.xzy.common.ServerResponse;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,14 @@ public interface UserService {
      */
     User getUserByUserId(Integer userId);
 
+    //用户登录
+    ServerResponse<User> login(String userName, String userPassword);
+
+    //用户通过邮箱登录
+    ServerResponse<User> loginByEmail(String userEmail, String userPassword);
+
+    //用户通过电话登录
+    ServerResponse<User> loginByTel(String userTel, String userPassword);
 
     /**
      * 根据userId修改密码
@@ -41,50 +50,6 @@ public interface UserService {
      */
     @Transactional
     Integer updatePassword(String userPassword, Integer userId);
-
-    /**
-     * 修改昵称
-     *
-     * @param user
-     * @return
-     */
-    Integer updateReal(User user);
-
-    /**
-     * 修改邮箱
-     *
-     * @param userId
-     * @param userEmail
-     * @return
-     */
-    int updateEmail(Integer userId, String userEmail);
-
-    /**
-     * 修改电话号码
-     *
-     * @param userId
-     * @param userTel
-     * @return
-     */
-    int updateTel(Integer userId, String userTel);
-
-    /**
-     * 修改生日
-     *
-     * @param userId
-     * @param userBirth
-     * @return
-     */
-    int updateUserBirth(Integer userId, Date userBirth);
-
-    /**
-     * 修改性别
-     *
-     * @param userId
-     * @param sex
-     * @return
-     */
-    int updateUserSex(Integer userId, String sex);
 
     /**
      * 用户头像上传
@@ -103,5 +68,8 @@ public interface UserService {
      * @return
      */
     int updatePic(String UserPic, Integer userId);
+
+    //注册
+    ServerResponse<String> register(User user);
 
 }

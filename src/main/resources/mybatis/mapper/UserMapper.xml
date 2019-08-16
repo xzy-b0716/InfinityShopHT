@@ -28,21 +28,57 @@
         where user_id = #{userId,jdbcType=INTEGER}
     </select>
 
-  <!--根据用户名查询user-->
-  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
-     SELECT
-    <include refid="Base_Column_List" />
-     FROM `user`
-     WHERE user_name = #{userName}
-  </select>
-
     <select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
     SELECT COUNT(1)
     FROM `user`
     WHERE user_name = #{userName}
   </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="checkUserEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where user_email = #{email}
+  </select>
+
+    <select id="selectLogin" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+      <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName}
+    and user_password = #{userPassword}
+  </select>
+
+    <select id="selectLoginByEmail" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_email = #{userEmail}
+    and user_password = #{userPassword}
+  </select>
+
+    <select id="checkUserTel" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where user_tel = #{userTel}
+  </select>
+
+    <select id="selectLoginByTel" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_tel = #{userTel}
+    and user_password = #{userPassword}
+  </select>
+
+    <!--根据用户名查询user-->
+    <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+     SELECT
+    <include refid="Base_Column_List" />
+     FROM `user`
+     WHERE user_name = #{userName}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
@@ -140,13 +176,6 @@
     WHERE user_id = #{userId}
   </update>
 
-    <!--修改用户昵称-->
-    <update id="updateRealByUserId" parameterType="com.xzy.beans.User">
-    UPDATE `user`
-    SET user_real = #{userReal}
-    WHERE user_id = #{userId}
-  </update>
-
     <!--修改密码-->
     <update id="updatePasswordByUsrId" parameterType="com.xzy.beans.User">
     UPDATE `user`
@@ -154,44 +183,44 @@
     WHERE user_id = #{userId}
   </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.xzy.beans.User">
-        update user
-        <set>
-            <if test="userName != null">
-                user_name = #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="userPassword != null">
-                user_password = #{userPassword,jdbcType=VARCHAR},
-            </if>
-            <if test="userEmail != null">
-                user_email = #{userEmail,jdbcType=VARCHAR},
-            </if>
-            <if test="userTel != null">
-                user_tel = #{userTel,jdbcType=VARCHAR},
-            </if>
-            <if test="userBirth != null">
-                user_birth = #{userBirth,jdbcType=TIMESTAMP},
-            </if>
-            <if test="userCreat != null">
-                user_creat = #{userCreat,jdbcType=DATE},
-            </if>
-            <if test="userReal != null">
-                user_real = #{userReal,jdbcType=VARCHAR},
-            </if>
-            <if test="userSex != null">
-                user_sex = #{userSex,jdbcType=CHAR},
-            </if>
-            <if test="userPic != null">
-                user_pic = #{userPic,jdbcType=VARCHAR},
-            </if>
-            <if test="userBackground != null">
-                user_background = #{userBackground,jdbcType=VARCHAR}
-            </if>
-        </set>
-        where user_id = #{userId,jdbcType=INTEGER}
-    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xzy.beans.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirth != null" >
+        user_birth = #{userBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCreat != null" >
+        user_creat = #{userCreat,jdbcType=DATE},
+      </if>
+      <if test="userReal != null" >
+        user_real = #{userReal,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userPic != null" >
+        user_pic = #{userPic,jdbcType=VARCHAR},
+      </if>
+      <if test="userBackground != null" >
+        user_background = #{userBackground,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
 
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xzy.beans.User">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xzy.beans.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},

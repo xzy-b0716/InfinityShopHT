@@ -2,6 +2,7 @@ package com.xzy.controller;
 
 import com.xzy.beans.User;
 import com.xzy.common.Cont;
+import com.xzy.common.ServerResponse;
 import com.xzy.exception.InfintyException;
 import com.xzy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @date 2019/8/3 - 15:23
  */
 @RestController
+@RequestMapping("/user/")
 public class UserContorller {
 
     @Autowired
@@ -40,6 +42,16 @@ public class UserContorller {
         return user;
     }
 
+    //用户登录
+    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    public ServerResponse<User> login(String username, String password, HttpSession session){
+        ServerResponse<User> response = userService.login(username,password);
+        if(response.isSuccess()){
+            session.setAttribute(Cont.CURRENT_USER,response.getData());
+        }
+        return response;
+    }
+
     /**
      * 修改头像
      *
@@ -58,24 +70,7 @@ public class UserContorller {
         return map;
     }
 
-    /**
-     * 修改用户昵称
-     *
-     * @param session
-     * @param real
-     * @return
-     */
-    @RequestMapping(value = "updateUserReal.do", method = RequestMethod.POST)
-    public int updateUserReal(HttpSession session, String real) {
-        User user1 = (User) session.getAttribute(Cont.CURRENT_USER);
-        if (user1 == null) {
-            throw new InfintyException("当前用户不存在或未登录");
-        }
-        user1.setUserReal(real);
 
-        Integer updateReal = userService.updateReal(user1);
-        return updateReal;
-    }
 
     /**
      * 修改密码
@@ -94,71 +89,39 @@ public class UserContorller {
         return updatePassword;
     }
 
-    /**
-     * 修改邮箱
-     *
-     * @param session
-     * @param email
-     * @return
-     */
-    @RequestMapping(value = "updateUserEmail.do", method = RequestMethod.POST)
-    public int updateUserEmail(HttpSession session, String email) {
-        User user = getUser(session);
-        if (user == null) {
-            throw new InfintyException("当前用户不存在或未登录");
+
+    //用户通过邮箱登录
+    @RequestMapping(value = "loginbyemail.do",method = RequestMethod.POST)
+    public ServerResponse<User> loginByEmail(String email, String password, HttpSession session){
+        ServerResponse<User> response = userService.loginByEmail(email,password);
+        if(response.isSuccess()){
+            session.setAttribute(Cont.CURRENT_USER,response.getData());
         }
-        int updateEmail = userService.updateEmail(user.getUserId(), email);
-        return updateEmail;
+        return response;
     }
 
-    /**
-     * 修改电话号码
-     *
-     * @param session
-     * @param userTel
-     * @return
-     */
-    @RequestMapping(value = "updateUserTel.do", method = RequestMethod.POST)
-    public int updateUserTel(HttpSession session, String userTel) {
-        User user = getUser(session);
-        if (user == null) {
-            throw new InfintyException("当前用户不存在或未登录");
+    //用户通过电话登录
+    @RequestMapping(value = "loginbytel.do",method = RequestMethod.POST)
+    public ServerResponse<User> loginByTel(String userTel, String userPassword, HttpSession session){
+        ServerResponse<User> response = userService.loginByTel(userTel,userPassword);
+        if(response.isSuccess()){
+            session.setAttribute(Cont.CURRENT_USER,response.getData());
         }
-        int updateTel = userService.updateTel(user.getUserId(), userTel);
-        return updateTel;
+        return response;
     }
 
-    /**
-     * 修改生日
-     *
-     * @param session
-     * @param userBirth
-     * @return
-     */
-    @RequestMapping(value = "updateBirth.do", method = RequestMethod.POST)
-    public int updateBirth(HttpSession session, Date userBirth) {
-        User user = getUser(session);
-        if (user == null) {
-            throw new InfintyException("当前用户不存在或未登录");
-        }
-        int updateBirth = userService.updateUserBirth(user.getUserId(), userBirth);
-        return updateBirth;
+
+    //退出功能
+    @RequestMapping(value = "logout.do",method = RequestMethod.GET)
+    public ServerResponse<String> logout(HttpSession session){
+        session.removeAttribute(Cont.CURRENT_USER);
+        return ServerResponse.createBySuccess();
     }
 
-    /**
-     * 修改性别
-     *
-     * @param session
-     * @param userSex
-     * @return
-     */
-    @RequestMapping(value = "updateSex.do", method = RequestMethod.POST)
-    public int updateSex(HttpSession session, String userSex) {
-        User user = getUser(session);
-        if (user == null) {
-            throw new InfintyException("当前用户不存在或未登录");
-        }
-        int updateSex = userService.updateUserSex(user.getUserId(), userSex);
-        return updateSex;
+    //注册接口
+    @RequestMapping(value = "register.do",method = RequestMethod.POST)
+    public ServerResponse<String> register(User user){
+        return userService.register(user);
     }
+
 }

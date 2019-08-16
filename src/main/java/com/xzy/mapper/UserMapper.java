@@ -23,9 +23,8 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+    //查用户
     int checkUserName(String userName);
-
-    User selectLogin(@Param("userName") String userName, @Param("userPassword") String userPassword);
 
     /**
      * 根据userId更新头像
@@ -36,14 +35,6 @@ public interface UserMapper {
     int updatePicByUserId(User user);
 
     /**
-     * 根据userId修改昵称
-     *
-     * @param user
-     * @return
-     */
-    int updateRealByUserId(User user);
-
-    /**
      * 修改密码
      *
      * @param user
@@ -51,4 +42,18 @@ public interface UserMapper {
      */
     int updatePasswordByUsrId(User user);
 
+    //查邮箱
+    int checkUserEmail(String email);
+
+    //用户查询
+    User selectLogin(@Param("userName") String userName, @Param("userPassword")String userPassword);
+
+    //用户邮箱查询
+    User selectLoginByEmail(@Param("userEmail") String userEmail, @Param("userPassword")String userPassword);
+
+    //查电话
+    int checkUserTel(String userTel);
+
+    //用户电话查询
+    User selectLoginByTel(@Param("userTel") String userTel, @Param("userPassword")String userPassword);
 }

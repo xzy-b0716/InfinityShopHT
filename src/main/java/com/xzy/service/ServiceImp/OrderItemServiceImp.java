@@ -49,7 +49,7 @@ public class OrderItemServiceImp implements com.xzy.service.OrderItemService {
         Iterator<Cart> iterator = carts.iterator();
         while (iterator.hasNext()){
             Cart cart = iterator.next();
-            if(cart.getChecked() == 1){
+            if(cart.getChecked() == 0){
                 Orderitem orderitem = new Orderitem();
                 //拿到商品
                 Integer productId = cart.getProductId();
