@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @RestController
 public class SecProductController {
@@ -26,6 +27,7 @@ public class SecProductController {
     @RequestMapping("queryAll/{productId}")
     public Seckill queryByProductId(@PathVariable("productId") Integer productId) {
         Seckill seckill = secProductService.queryByProductId(productId);
+        seckill.setNowTime(new Date().getTime());
         seckill.setLike(productService.selectClassProductByProductId(productId));
         seckill.setInformation(informationService.selectInformation(productId));
         seckill.setCountDiscuss(productDiscussService.countDiscuss(productId));

@@ -8,6 +8,16 @@ import java.util.List;
 
 public class Seckill {
 
+    public Long getNowTime() {
+        return nowTime;
+    }
+
+    public void setNowTime(long nowTime) {
+        this.nowTime = nowTime;
+    }
+
+    private Long nowTime;
+
     private List<Product> like;
 
     public List<Product> getLike() {
