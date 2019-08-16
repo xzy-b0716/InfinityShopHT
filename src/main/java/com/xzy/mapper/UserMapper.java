@@ -56,4 +56,8 @@ public interface UserMapper {
 
     //用户电话查询
     User selectLoginByTel(@Param("userTel") String userTel, @Param("userPassword")String userPassword);
+
+    int checkPassword(@Param("userPassword") String userPassword,@Param("userId") Integer userId);
+
+    int checkEmailByUserId(@Param("userEmail")String userEmail,@Param("userId")Integer userId);
 }

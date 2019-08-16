@@ -2,10 +2,8 @@ package com.xzy.service;
 
 import com.xzy.beans.User;
 import com.xzy.common.ServerResponse;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -24,13 +22,6 @@ public interface UserService {
      */
     User getUserByUserName(String userName);
 
-    /**
-     * 根据id获取User
-     *
-     * @param userId
-     * @return
-     */
-    User getUserByUserId(Integer userId);
 
     //用户登录
     ServerResponse<User> login(String userName, String userPassword);
@@ -41,24 +32,7 @@ public interface UserService {
     //用户通过电话登录
     ServerResponse<User> loginByTel(String userTel, String userPassword);
 
-    /**
-     * 根据userId修改密码
-     *
-     * @param userId
-     * @param userPassword
-     * @return
-     */
-    @Transactional
-    Integer updatePassword(String userPassword, Integer userId);
 
-    /**
-     * 用户头像上传
-     *
-     * @param file
-     * @param userId
-     * @return
-     */
-    Map<String, Object> userPicUpload(MultipartFile file, Integer userId);
 
     /**
      * 根据userId修改图片地址
@@ -71,5 +45,37 @@ public interface UserService {
 
     //注册
     ServerResponse<String> register(User user);
+
+    /**
+     * 用户头像上传
+     * @param file
+     * @param userId
+     * @return
+     */
+    Map<String,Object> userPicUpload(MultipartFile file,Integer userId);
+
+
+    /**
+     * 登录用户重置密码
+     * @param passwordOld
+     * @param passwordNew
+     * @param user
+     * @return
+     */
+    ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user);
+
+    /**
+     * 更新个人信息
+     * @param user
+     * @return
+     */
+    ServerResponse<User> updateUserInfo(User user);
+
+    /**
+     * 根据id查询用户信息
+     * @param userId
+     * @return
+     */
+    ServerResponse<User> getInformation(Integer userId);
 
 }

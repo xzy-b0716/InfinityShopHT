@@ -5,8 +5,8 @@ import com.xzy.common.ResponseCode;
 import com.xzy.common.ServerResponse;
 import com.xzy.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2019/8/1 - 21:30
  */
 @RestController
-@RequestMapping(value = "/address")
+@RequestMapping(value = "/address/")
 public class AddressController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class AddressController {
      * @param userId
      * @return
      */
-    @GetMapping(value = "/addressList")
+    @RequestMapping(value = "addressList.do",method = RequestMethod.POST)
     public ServerResponse<List<Address>> addressList(Integer userId){
         if (userId==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
@@ -43,7 +43,7 @@ public class AddressController {
      * @param addressId
      * @return
      */
-    @GetMapping(value = "/getaddressById")
+    @RequestMapping(value = "getaddressById.do",method = RequestMethod.POST)
     public ServerResponse<Address> getaddressById(Integer addressId){
         if (addressId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
@@ -58,9 +58,9 @@ public class AddressController {
      * @param tbAddress
      * @return
      */
-    @GetMapping(value = "/addAddress")
+    @RequestMapping(value = "addAddress.do",method = RequestMethod.POST)
     public ServerResponse addAddress(Integer userId,Address tbAddress){
-        //通过session获取user
+        //todo 通过session获取user
         //HttpSession session,
         //User user = (User) session.getAttribute(Cont.CURRENT_USER);
         if (userId == null){
@@ -76,7 +76,7 @@ public class AddressController {
      * @param tbAddress
      * @return
      */
-    @GetMapping(value = "/updateAddress")
+    @RequestMapping(value = "updateAddress.do",method = RequestMethod.POST)
     public ServerResponse updateAddress(Integer userId,Address tbAddress){
         if (userId==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
@@ -91,7 +91,7 @@ public class AddressController {
      * @param addressId
      * @return
      */
-    @GetMapping(value = "/delAddress")
+    @RequestMapping(value = "delAddress.do",method = RequestMethod.POST)
     public ServerResponse delAddress(Integer addressId){
         if (addressId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
