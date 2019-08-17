@@ -88,8 +88,6 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-<<<<<<< HEAD
-=======
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -100,9 +98,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
         </dependency>
-
-
->>>>>>> 25a06ed9469878a0ae6373d0c6a918e8d5e2b2ec
     </dependencies>
 
     <build>
