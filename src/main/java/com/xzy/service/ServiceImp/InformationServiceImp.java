@@ -5,7 +5,6 @@ import com.xzy.mapper.ProductMapper;
 import com.xzy.service.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Create by Shuai on 2019/8/12 21:51
