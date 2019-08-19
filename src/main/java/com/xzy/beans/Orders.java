@@ -10,7 +10,6 @@ public class Orders {
      *
      * @mbggenerated
      */
-
     private Integer ordersId;
     private Float ordersTotalPrice;
     private Integer ordersPayStatus;

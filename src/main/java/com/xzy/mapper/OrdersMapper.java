@@ -87,4 +87,6 @@ public interface OrdersMapper {
     int findSendStutas(int ordersId);
 
     Seckill findSecByPId(int productId);
+
+
 }

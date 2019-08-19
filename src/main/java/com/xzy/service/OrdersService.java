@@ -1,11 +1,9 @@
 package com.xzy.service;
 
+import com.xzy.beans.Orders;
+
 import java.util.List;
 
-/**
- * @author cairunduo
- * @date 2019/8/13 - 3:09
- */
 public interface OrdersService {
     //单点购买增加(生成)订单
     int addOrderBy01(int userId, int addressId, int productId, int num);
@@ -39,4 +37,7 @@ public interface OrdersService {
 
     //查询待收货订单
     List<Integer> findGet();
+
+    //根据ordersId查询订单
+    Orders findOneOrder(int ordersId);
 }

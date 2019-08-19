@@ -42,6 +42,7 @@
     <result column="product_com_num" property="productComNum" jdbcType="INTEGER" />
     <result column="product_price" property="productPrice" jdbcType="REAL" />
     <result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
+    <result column="product_size_pic" property="productSizePic" jdbcType="VARCHAR" />
     <result column="product_superclass" property="productSuperclass" jdbcType="CHAR" />
     <result column="product_class_id" property="productClassId" jdbcType="VARCHAR" />
     <result column="product_createtime" property="productCreatetime" jdbcType="TIMESTAMP" />
@@ -275,7 +276,7 @@
 
   <select id="findGet" resultType="java.lang.Integer">
     select orders_id from orders where orders_get_status=0;
-  </select>
+</select>
 
   <select id="findPayStutas" resultType="java.lang.Integer">
     select orders_pay_status from orders where orders_id=#{ordersId}

@@ -10,6 +10,7 @@ public class OrderitemProduct {
     private String oiProductColor;
     private String productName;
     private String productPicture;
+    private Float productPrice;
 
     public Integer getOrderitemId() {
         return orderitemId;
@@ -81,5 +82,13 @@ public class OrderitemProduct {
 
     public void setProductPicture(String productPicture) {
         this.productPicture = productPicture;
+    }
+
+    public Float getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Float productPrice) {
+        this.productPrice = productPrice;
     }
 }

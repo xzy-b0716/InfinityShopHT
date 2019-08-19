@@ -1,6 +1,5 @@
 package com.xzy.service.serviceImp;
 
-
 import com.xzy.beans.Orders;
 import com.xzy.beans.Product;
 import com.xzy.beans.Seckill;
@@ -146,5 +145,32 @@ public class OrdersServiceImp implements com.xzy.service.OrdersService {
         return ordGet;
     }
 
+    //根据ordersId查询订单
+    @Override
+    public Orders findOneOrder(int ordersId){
+        Orders orders = om.selectByPrimaryKey(ordersId);
+        return orders;
+    }
 
+    /*//用ordersId查orderitem得到所有该订单的订单的订单项
+    public List<Orderitem> findOiByOid(int ordersId){
+        List<Orderitem> list = om.findOiByOid(ordersId);
+        return list;
+    }*/
+
+    /*//增
+    public int addOrder(Orders orders){
+        int oId = om.insert(orders);
+        return oId;
+    }
+    //查
+    public Orders selctOrder(int id){
+        Orders orders = om.selectByPrimaryKey(id);
+        return orders;
+    }
+    //删
+    public int deleteOrder(int id){
+        int oId = om.deleteByPrimaryKey(id);
+        return oId;
+    }*/
 }

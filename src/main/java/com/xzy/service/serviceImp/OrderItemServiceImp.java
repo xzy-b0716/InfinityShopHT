@@ -6,13 +6,12 @@ import com.xzy.mapper.OrderitemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class OrderItemServiceImp implements com.xzy.service.OrderItemService {
-    @Resource
+    @Autowired
     private OrderitemMapper oim;
 
    //单点购买增加(生成)订单项
@@ -49,7 +48,7 @@ public class OrderItemServiceImp implements com.xzy.service.OrderItemService {
         Iterator<Cart> iterator = carts.iterator();
         while (iterator.hasNext()){
             Cart cart = iterator.next();
-            if(cart.getChecked() == 0){
+            if(cart.getChecked() == 1){
                 Orderitem orderitem = new Orderitem();
                 //拿到商品
                 Integer productId = cart.getProductId();

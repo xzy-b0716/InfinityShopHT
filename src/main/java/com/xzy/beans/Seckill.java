@@ -165,6 +165,7 @@ public class Seckill {
     public void setSeckillStock(Integer seckillStock) {
         this.seckillStock = seckillStock;
     }
+
     public Integer getProductId() {
         return productId;
     }

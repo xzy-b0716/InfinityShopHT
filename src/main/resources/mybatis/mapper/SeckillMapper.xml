@@ -153,6 +153,7 @@
         -->
         update seckill
         set seckill_title = #{seckillTitle,jdbcType=VARCHAR},
+
         seckill_price = #{seckillPrice,jdbcType=REAL},
         seckill_start_time = #{seckillStartTime,jdbcType=TIMESTAMP},
         seckill_end_time = #{seckillEndTime,jdbcType=TIMESTAMP},

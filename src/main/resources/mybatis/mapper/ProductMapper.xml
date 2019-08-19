@@ -89,8 +89,6 @@
     product_createtime
     desc
     limit 0,20
-=======
->>>>>>> 5610132d7478820ee3e8ab62c4c960c2bf018ac5
   </select>
 
     <!--商品分类-->
